@@ -1,0 +1,61 @@
+<% layout("/layouts/boilerplate") %>
+
+
+
+<form class="form" action="/article/<%= blog._id %>/?_method=PUT" method="POST">
+	
+		<h3 class="text-center mb-5"> SEO DESCRIPTIONS</h3>
+	
+	<div class="input-group mb-3">
+  <span class="input-group-text">SEO DESCRIPTIONS</span>
+  <textarea class="form-control" name="blog[seo][description]"> <%= blog.seo.description%></textarea>
+</div>
+
+	
+<div class="input-group mb-3">
+  <span class="input-group-text">SEO KEYWORDS</span>
+  <textarea class="form-control" name="blog[seo][keywords]"><%= blog.seo.keywords%></textarea>
+</div> 
+	
+<div class="input-group mb-5">
+  <span class="input-group-text">Title/ Seo Url Extention</span>
+  <input type="text" value="<%= blog.title%>" class="form-control" name="blog[title]">
+  <input type="text"  value="<%= blog.urlExtention%>" class="form-control" name="blog[urlExtention]">	
+</div>
+	
+	
+	
+	
+	<%  blog.content.forEach((article, indx)=> { %>
+	<div class="section">
+	<hr>
+	<div class="title text-muted mb-3"> Paragraf <%= indx%></div>
+	
+	<div class="input-group mb-3">
+		 <input type="text" value="<%= article.subtitle%>" class="form-control" name="blog[content][<%= indx %>][subtitle]">
+	</div>
+	
+   <div class="input-group mb-3">
+  <span class="input-group-text">Paragraf</span>
+  <textarea class="form-control" name="blog[content][<%= indx %>][text]"><%= article.text%></textarea>
+</div>
+	
+	
+	<div class="input-group mb-5">
+		 <input type="text" value="<%= article.img%>" class="form-control" name="blog[content][<%= indx %>][img]">
+	</div>
+		
+	</div>		
+		
+	<% }); %>
+	
+	
+<input class="btn btn-success" type="submit" value="SAVE CHANGES">	
+	
+</form>
+
+<div class="m-5">
+	<a hreff="#"><button class="btn btn-success addParaghraf"> Add PARAGRAF </button></a>
+</div>
+
+<script src="/javaScripts/addparagraf.js"></script>

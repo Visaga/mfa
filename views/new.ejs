@@ -1,0 +1,52 @@
+<% layout("/layouts/boilerplate") %>
+
+
+
+<form class="form" action="/article" method="POST">
+	
+<div class="input-group mb-5">
+  <span class="input-group-text">Title</span>
+  <input type="text" placeholder="Title" class="form-control" name="blog[title]">
+  <input type="text"  placeholder="Seo Title/ URL Extention" class="form-control" name="blog[urlExtention]">	
+</div>
+	
+	<div class="section">
+		<div class="input-group mb-3">
+		 <input type="text" placeholder="Subtitle" class="form-control" name="blog[content][subtitle]">
+	</div>
+	
+	
+<div class="input-group mb-3">
+  <span class="input-group-text">Paragraf</span>
+  <textarea class="form-control" name="blog[content][text]"></textarea>
+</div>
+	
+	
+	<div class="input-group mb-5">
+		 <input type="text" placeholder="image Url" class="form-control" name="blog[content][img]">
+	</div>
+	</div>
+	
+		
+	<h3 class="text-center mb-5"> SEO DESCRIPTIONS</h3>
+	
+	<div class="input-group mb-3">
+  <span class="input-group-text">SEO DESCRIPTIONS</span>
+  <textarea class="form-control" name="blog[seo][description]">put some descriptions here</textarea>
+</div>
+
+	
+<div class="input-group mb-3">
+  <span class="input-group-text">SEO KEYWORDS</span>
+  <textarea class="form-control" name="blog[seo][keywords]">put some KEYWORDS</textarea>
+</div> 
+	
+<input class="btn btn-success" type="submit" value="SUBMIT">
+	
+</form>
+
+
+<div class="m-5">
+	<a hreff="#"><button class="btn btn-success addParaghraf"> Add PARAGRAF </button></a>
+</div>
+<script src="/javaScripts/addparagraf.js"></script>

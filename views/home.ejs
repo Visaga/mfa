@@ -1,0 +1,21 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class=" d-flex justify-content-between flex-wrap">
+	
+	<% allBlogs.forEach(blog =>{ %>
+  <div class="card mb-3" style="width: 18rem;">
+  <img src="<%= blog.content[0].img %>" class="card-img-top" alt="fotka">
+  <div class="card-body">
+    <h5 class="card-title"><%= blog.title %></h5>
+	  
+    <p class="card-text"><%= blog.content[0].text.slice(0,90) + "..." %></p>
+    <a href="/article/<%= blog.urlExtention.replace(/ /g, "-") %>" class="btn btn-primary">Read more</a>
+  </div>
+</div>
+
+<% }) %>
+</div>
+
+
+
+

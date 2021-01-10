@@ -1,0 +1,27 @@
+<% layout("/layouts/boilerplate") %>
+
+
+		<h1 class="text-center"> <%= foundPage.title %> </h1>
+	
+	<div class=" mb-5">
+		<% foundPage.content.forEach(abstract => { %>
+		
+		     <h4 class=" m-3"> <strong><%= abstract.subtitle %></strong></h4>
+			<p class=" mb-3"><%= abstract.text %></p>
+		    <div >
+				
+				<% if ( abstract.img){ %>
+				<img class="img-fluid mb-2" src="<%= abstract.img %>">
+				<% } else{ %> 
+				<hr> 
+				<% } %>
+		</div>
+		
+		
+		<% }) %>
+		
+		
+	 <a href="/article/<%= foundPage._id%>/edit" class="btn btn-primary">Edit</a>	
+	</div>
+	
+
