@@ -19,18 +19,24 @@
 	
 <div class="input-group mb-5">
   <span class="input-group-text">Title/ Seo Url Extention</span>
-  <input type="text" value="<%= blog.title%>" class="form-control" name="blog[title]">
+	<input type="text" value="<%= blog.seo.title%>"  class="form-control" name="blog[seo][title]">
   <input type="text"  value="<%= blog.urlExtention%>" class="form-control" name="blog[urlExtention]">	
 </div>
 	
 	
+<hr class="mb-5">
+	 <h3 class="text-center mb-5"> Article</h3>
 	
+	<div class="input-group mb-3">
+		<span class="input-group-text">Main Title H1..</span>
+	  <input type="text" value="<%= blog.title%>" class="form-control" name="blog[title]">
+	</div> 
 	
 	<%  blog.content.forEach((article, indx)=> { %>
-	<div class="section">
-	<hr>
-	<div class="title text-muted mb-3"> Paragraf <%= indx%></div>
+	<div class="section ">
 	
+	<div class="title text-muted mt-5 mb-3"> Paragraf <%= indx%></div>
+	<hr mt-5>
 	<div class="input-group mb-3">
 		 <input type="text" value="<%= article.subtitle%>" class="form-control" name="blog[content][<%= indx %>][subtitle]">
 	</div>
@@ -42,6 +48,8 @@
 	
 	
 	<div class="input-group mb-5">
+		<span class="input-group-text">Image Alt / Img Path </span>
+		<input type="text" value="<%= article.alt%>" class="form-control" name="blog[content][<%= indx %>][alt]">
 		 <input type="text" value="<%= article.img%>" class="form-control" name="blog[content][<%= indx %>][img]">
 	</div>
 		

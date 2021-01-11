@@ -1,27 +1,89 @@
 <% layout("/layouts/boilerplate") %>
 
-
-		<h1 class="text-center"> <%= foundPage.title %> </h1>
+<div class="row">
+	<div class="col-xxl-1 fixed-top d-none d-xxl-block">
+		SHare social netvorks bar
+	</div>
+	
+<!-- 	
+	////// -->
+	<div class=" col-xxl-8 col-xl-7 col-lg-12">
+		 <h1 class="text-start"> <%= foundPage.title %> </h1>
 	
 	<div class=" mb-5">
 		<% foundPage.content.forEach(abstract => { %>
 		
 		     <h4 class=" m-3"> <strong><%= abstract.subtitle %></strong></h4>
-			<p class=" mb-3"><%= abstract.text %></p>
+			<p class="text-left mb-3"><%= abstract.text %></p>
 		    <div >
 				
 				<% if ( abstract.img){ %>
-				<img class="img-fluid mb-2" src="<%= abstract.img %>">
+				<img class="img-fluid mb-2" src="<%= abstract.img %>"  alt="<%= abstract.alt %>">
 				<% } else{ %> 
 				<hr> 
 				<% } %>
 		</div>
 		
-		
 		<% }) %>
 		
 		
-	 <a href="/article/<%= foundPage._id%>/edit" class="btn btn-primary">Edit</a>	
+	 <a href="/article/<%= foundPage._id%>/edit" class="btn btn-primary">Edit</a>
+		
+		<div class="container-fluid bg-light p-5 mt-5 mb-5 ">
+			<button type="button" class="btn btn-primary">
+  Share  <span class="badge bg-secondary">Facebook</span>
+  <span class="visually-hidden">unread messages</span>
+</button>
+			
+			<button type="button" class="btn btn-primary">
+  Share  Vkontakte<span class="badge bg-secondary"></span>
+  <span class="visually-hidden">unread messages</span>
+</button>
+		</div>
 	</div>
+	</div>
+	
+	
+	<div class="col-xxl-4 col-xl-5  col-lg-12 d-flex flex-wrap justify-content-around ">
+		
+			<% allBlogs.forEach(blog =>{ %>
+  <div class="card mb-3" style="width: 18rem;">
+  <img src="<%= blog.content[0].img %>" class="card-img-top" alt="fotka">
+  <div class="card-body">
+    <h5 class="card-title"><%= blog.title %></h5>
+	  
+    <p class="card-text"><%= blog.content[0].text.slice(0,90) + "..." %></p>
+    <a href="/article/<%= blog.urlExtention.replace(/ /g, "-") %>" class="btn btn-primary">Read more</a>
+  </div>
+</div>
+
+<% }) %>
+	</div>
+	
+	
+	
+	
+	<!-- /////// -->
+	
+	
+	<div class=" col-xs-12 d-flex flex-wrap justify-content-around ">
+		
+			<% allBlogs.forEach(blog =>{ %>
+  <div class="card mb-3" style="width: 18rem;">
+  <img src="<%= blog.content[0].img %>" class="card-img-top" alt="fotka">
+  <div class="card-body">
+    <h5 class="card-title"><%= blog.title %></h5>
+	  
+    <p class="card-text"><%= blog.content[0].text.slice(0,90) + "..." %></p>
+    <a href="/article/<%= blog.urlExtention.replace(/ /g, "-") %>" class="btn btn-primary">Read more</a>
+  </div>
+</div>
+
+<% }) %>
+	</div>
+	
+	
+</div>
+		
 	
 

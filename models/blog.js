@@ -7,13 +7,16 @@ const BlogSchema = new Schema ({
     title: {type: String, require: true},
 	date: Date,
 	urlExtention: {type: String, require: true},
+	published: Boolean,
 	
 	content: {type: [{
 		subtitle: String,
 		text: String,
-		img: String
+		img: String,
+		alt: String
 	}], require: true},
 	seo: {
+		title: String,
 		description: String,
 		keywords: String
 	}

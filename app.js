@@ -125,8 +125,9 @@ app.get("/article/:urlextention", async(req, res) => {
 	const urlExtention = req.params.urlextention.replace(/-/g, " ");
 	
 	const foundPage = await Blog.findOne({urlExtention});
+		const allBlogs = await Blog.find({});
 		
-	res.render("show", {foundPage});
+	res.render("show", {foundPage, allBlogs});
 		
 	} catch(err){
 		console.error(err);

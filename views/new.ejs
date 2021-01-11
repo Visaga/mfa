@@ -4,15 +4,37 @@
 
 <form class="form" action="/article" method="POST">
 	
-<div class="input-group mb-5">
+	
+  <h3 class="text-center mb-5"> SEO DESCRIPTIONS</h3>
+	
+	<div class="input-group mb-5">
   <span class="input-group-text">Title</span>
-  <input type="text" placeholder="Title" class="form-control" name="blog[title]">
-  <input type="text"  placeholder="Seo Title/ URL Extention" class="form-control" name="blog[urlExtention]">	
+  <input type="text" placeholder="SEO Title: no simbols, must have  1-3 kewwords+ company" class="form-control" minlength="30" maxlength="70" name="blog[seo][title]">
+  <input type="text"  placeholder="URL Extention" class="form-control" required name="blog[urlExtention]">	
 </div>
 	
+	<div class="input-group mb-3">
+  <span class="input-group-text">SEO DESCRIPTIONS</span>
+  <textarea class="form-control" name="blog[seo][description]">Snipet Must be different to title  ot 70 do 150-200 simb</textarea>
+</div>
+	
+<div class="input-group mb-3">
+  <span class="input-group-text">SEO KEYWORDS</span>
+  <textarea class="form-control" name="blog[seo][keywords]">put some KEYWORDS</textarea>
+</div> 
+	
+	<hr class="mb-5">
+	 <h3 class="text-center mb-5"> Article</h3>
+	
+	
+	<div class="input-group mt-5 mb-5">
+		<span class="input-group-text">Main Title H1..</span>
+		 <input type="text" placeholder="Title" class="form-control" name="blog[title]">
+	</div>
+		
 	<div class="section">
 		<div class="input-group mb-3">
-		 <input type="text" placeholder="Subtitle" class="form-control" name="blog[content][subtitle]">
+		 <input type="text" placeholder="Subtitle (if needed)" class="form-control" name="blog[content][subtitle]">
 	</div>
 	
 	
@@ -23,30 +45,18 @@
 	
 	
 	<div class="input-group mb-5">
+		<span class="input-group-text">Image Alt / Img Path </span>
+		<input type="text" placeholder="Alt / Descriptions" class="form-control" name="blog[content][alt]">
 		 <input type="text" placeholder="image Url" class="form-control" name="blog[content][img]">
 	</div>
 	</div>
 	
 		
-	<h3 class="text-center mb-5"> SEO DESCRIPTIONS</h3>
-	
-	<div class="input-group mb-3">
-  <span class="input-group-text">SEO DESCRIPTIONS</span>
-  <textarea class="form-control" name="blog[seo][description]">put some descriptions here</textarea>
-</div>
 
 	
-<div class="input-group mb-3">
-  <span class="input-group-text">SEO KEYWORDS</span>
-  <textarea class="form-control" name="blog[seo][keywords]">put some KEYWORDS</textarea>
-</div> 
-	
-<input class="btn btn-success" type="submit" value="SUBMIT">
+<input class="btn btn-success  m-5" type="submit" value="SUBMIT">
 	
 </form>
 
 
-<div class="m-5">
-	<a hreff="#"><button class="btn btn-success addParaghraf"> Add PARAGRAF </button></a>
-</div>
 <script src="/javaScripts/addparagraf.js"></script>
