@@ -2,7 +2,7 @@
 
 
 
-<form class="form" action="/article" method="POST">
+<form class="form" action="/articles" method="POST">
 	
 	
   <h3 class="text-center mb-5"> SEO DESCRIPTIONS</h3>
@@ -22,6 +22,24 @@
   <span class="input-group-text">SEO KEYWORDS</span>
   <textarea class="form-control" name="blog[seo][keywords]">put some KEYWORDS</textarea>
 </div> 
+	
+	
+	
+<select class="form-select mb-3" name="blog[category]">
+  <option selected>Choose Category</option>
+  <option value="1">One</option>
+  <option value="2">Two</option>
+  <option value="3">Three</option>
+</select>
+	
+	
+	
+	<input type="hidden" value="false"  class="form-control" name="blog[published]" id="hiddenCheckBox">
+  <input class="form-check-input" type="checkbox" value="" id="checkBox">
+  <label class="form-check-label" for="flexCheckDefault">
+     PUBLISH NOW
+  </label>
+
 	
 	<hr class="mb-5">
 	 <h3 class="text-center mb-5"> Article</h3>
@@ -59,4 +77,4 @@
 </form>
 
 
-<script src="/javaScripts/addparagraf.js"></script>
+<script src="/javaScripts/checkbox.js"></script>

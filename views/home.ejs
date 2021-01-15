@@ -1,22 +1,29 @@
 <% layout("/layouts/boilerplate") %>
 
 
-<div class=" d-flex justify-content-between flex-wrap">
-
-	
+<div class="container">
+	<div class=" d-flex justify-content-between flex-wrap">
 	<% allBlogs.forEach(blog =>{ %>
-  <div class="card mb-3" style="width: 18rem;">
+	
+  <div class="card mb-3" style="width: 18rem;" >
   <img src="<%= blog.content[0].img %>" class="card-img-top" alt="fotka">
   <div class="card-body">
     <h5 class="card-title"><%= blog.title %></h5>
 	  
     <p class="card-text"><%= blog.content[0].text.slice(0,90) + "..." %></p>
-    <a href="/article/<%= blog.urlExtention.replace(/ /g, "-") %>" class="btn btn-primary">Read more</a>
+	  <div class="d-flex justify-content-between">
+		   <a href="/articles/<%= blog.urlExtention.replace(/ /g, "-")%>/<%= blog._id%>" class="btn btn-primary">Read more</a>
+	  <form action="/articles/<%= blog._id %>/?_method=DELETE" method="POST">
+		  <input type="submit" class="btn btn-danger" value="DELETE">
+	  </form>
+	  </div>
   </div>
 </div>
 
 <% }) %>
 </div>
+</div>
+
 
 
 

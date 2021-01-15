@@ -5,9 +5,10 @@ const Schema = mongoose.Schema;
 
 const BlogSchema = new Schema ({
     title: {type: String, require: true},
-	date: Date,
+	date: String,
 	urlExtention: {type: String, require: true},
 	published: Boolean,
+	category: String,       // NEED TO ADD SEARCH BY CATEGORY AND SHOW ONLY IF PUBLISHED TRUE
 	
 	content: {type: [{
 		subtitle: String,
