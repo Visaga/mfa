@@ -13,6 +13,17 @@ const Blog     = require("./models/blog.js");
 
 
 
+
+
+
+//NEED TO ADD JS FUNCTION TO CREATE SOME CARDS TO SHOW AJAX LAZY LOAD. ROUTE IS DONE
+
+
+
+
+
+
+
 app.set("view engine", "ejs");
 app.engine("ejs", ejsMate);
 app.use(express.urlencoded({extended: true}));
@@ -63,7 +74,7 @@ app.use("/", blogRoutes);
 
 
 
-app.get("/", (req, res) => res.redirect("/home"));
+app.get("/", (req, res) => res.redirect("/articles"));
 
 
 
@@ -71,7 +82,7 @@ app.get("/", (req, res) => res.redirect("/home"));
 
 
 //If page doesn't exist comes generick message 
-app.all("/*", (req, res) => {
+app.all("*", (req, res) => {
 	res.status(404).send("PAGE NOT FOUND")
 })
 

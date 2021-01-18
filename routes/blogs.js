@@ -80,8 +80,7 @@ router.put("/articles/:id",async( req, res)  => {
 	   await Blog.findByIdAndUpdate( req.params.id, req.body.blog );
 		
 	const  updated = await Blog.findById(req.params.id);	
-		 
-		console.log(req.body.blog)
+	
      	
 	res.redirect("/articles/" + updated.urlExtention.replace(/ /g, "-") + "/" + req.params.id);
 		
@@ -97,7 +96,7 @@ router.put("/articles/:id",async( req, res)  => {
 
 
 router.get("/articles/:urlextention/:id", async(req, res) => {
-	
+
 	try{
 	const foundPage = await Blog.findById(req.params.id);
 		
@@ -135,20 +134,32 @@ router.get("/articles/:urlextention/:id", async(req, res) => {
 
 //==================AJAX GET SOME BLOGS===================
 
-router.get("/articles/get/:number/:category", async(req, res) => {
+router.get("/articles/get/:getFrom/:category/:quantityRequired", async(req, res) => {
+
+	const parametrs = req.params.category == "All"? {published: true}: {category: req.params.category, published: true};
 	
-	const someBlogs = await Blog.find({category: req.params.category, published: true});
+	const someBlogs = await Blog.find(parametrs);
 	
 	let response = [];
 	
-	for (let i = +req.params.number; i < someBlogs.length; i++){
-		if (i != (+req.params.number + 5)){
-			response.push(someBlogs[i]);
-		} else{
-			res.send(response);
-			break
-		}
+	if (someBlogs.length > 0 && someBlogs.length > req.params.getFrom){		
+	  	for (let i = +req.params.getFrom; i < someBlogs.length; i++){
+		
+			if (i != (+req.params.getFrom + +req.params.quantityRequired)){  
+				response.push(someBlogs[i]); 
+			} else{
+				res.send(response); // if all good send required amount
+				break
+			}		
+			if (response.length >= (someBlogs.length - req.params.getFrom)){
+				res.send(response);     // if availible less then required stop after all availible pushed
+				break
+			};
+   		}
+	} else{
+		res.send("0");  // if nothing availible
 	}
+	
 });
 
 
