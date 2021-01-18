@@ -16,16 +16,16 @@ function getSomeBlogs( quantityOnPage, category , quantityRequired){
 }
 
 
-function renderBlogsPreviews(parrent, data, size = "20rem"){
+function renderBlogsPreviews(parrent, data, col = " "){
 	
 	
 	
 	data.forEach(blog => {
 		
 		parrent.insertAdjacentHTML("beforeend", `
-            <a href="/articles/${blog.urlExtention.replace(/ /g, "-") }/${ blog._id }" class="text-decoration-none text-dark">
+            <a href="/articles/${blog.urlExtention.replace(/ /g, "-") }/${ blog._id }" class=" ${col } text-decoration-none text-dark">
 				<div>
-                        <div class="card mb-3 " style="width: ${size};" >
+                        <div class="card mb-3 " " >
  						 <img src="${ blog.content[0].img }" class="card-img-top" alt="${ blog.title }">
   						<div class="card-body">
     					<h5 class="card-title"> ${ blog.title }.</h5> 
@@ -55,7 +55,7 @@ getAndRender(0, category, 5, rightBar);
 		console.log(document.body.offsetHeight - window.pageYOffset)
 		if ( (document.body.offsetHeight - window.pageYOffset) <= 950){
 		
-			getAndRender(0, "All", 10, lazyLoadingBlock, "22");	
+			getAndRender(0, "All", 10, lazyLoadingBlock, "col-md-6 col-lg-4 col-xl-3");	
 		}
 	});
 			
