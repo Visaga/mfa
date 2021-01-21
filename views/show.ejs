@@ -9,7 +9,7 @@
 	////// -->
 	
 	
-	<div class=" col-xxl-9 col-xl-8 col-lg-12">
+	<div class="col-xl-8 col-lg-12"  id="main-content">
 		 <% if (foundPage.published == false) { %>
 		     <div class="alert alert-danger" role="alert">
   NOT PUBLISHED YET!
@@ -23,7 +23,7 @@
 		<% foundPage.content.forEach(abstract => { %>
 		
 		     <h4 class=" m-3"> <strong><%= abstract.subtitle %></strong></h4>
-			<p class="text-left mb-3"><%= abstract.text %></p>
+			<p class="text-left mb-3"><%- abstract.text %></p>
 		    <div >
 				
 				<% if ( abstract.img){ %>
@@ -56,23 +56,26 @@
 	</div>
 	</div>
 	
+	
+	
+	<!-- //Separator -->
+	
+	<div class="col-xl-1" ></div>
+	
 	<!-- /////////////// right Bar-->
-	
-	<div class="col-xxl-3 col-xl-4  d-none d-xl-flex flex-wrap justify-content-around  h-25" id="rightBar"></div>
-	
-	
-	
-	
-	<!-- /////// nuzhna funkcyja na dobavlenie naprimer 10 statej pri prokrutke-->
-	
-	
-	
-	
-	
-	<div class=" row col-xs-12 d-flex flex-wrap justify-content-around " id="lazyLoadingBlock">
-		
+	<div class="col-xl-3 d-none d-xl-flex flex-column position-relative " id="rightBar">
+	<div id="rightBarBlocks" class=""></div>
 
+	<div id="rightBar-stickyBlock" class="mt-5"></div>
 	</div>
+		
+	
+	
+	
+
+	
+	
+	<div class=" row col-xs-12 d-flex flex-wrap justify-content-around " id="lazyLoadingBlock"></div>
 	
 	
 </div>

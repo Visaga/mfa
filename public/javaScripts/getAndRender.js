@@ -1,19 +1,26 @@
 document.addEventListener("DOMContentLoaded", () => {
 	
-const rightBar = document.querySelector("#rightBar");
+	
+const mainContent = document.querySelector("#main-content");	
+const rightBarBlocks = document.querySelector("#rightBarBlocks");
+const rightBarStickyBlock = document.querySelector("#rightBar-stickyBlock");	
 const lazyLoadingBlock = document.querySelector("#lazyLoadingBlock");
+
 
 	
 const category = document.querySelector("#category").textContent;
 	
-
-
+	
 	//Render some blocks to Right Bar
 	
 	getBlogs(0,5,category)
-	.then(data => renderBlogs(rightBar, data))
-	.catch(err => console.log("Problem to load right bar content.. : " + err));
+	.then(data => renderBlogs(rightBarBlocks, data))
+	.catch(err => console.log("Problem to load right bar content.. : " + err))
+	.finally(() => { renderStickyBlock() });
 	
+	
+	
+
 
 	
 	
@@ -87,6 +94,29 @@ const category = document.querySelector("#category").textContent;
 		.then(respond => respond.json())
 		.then(res => res)
 		.catch(err => console.log("Failed to fetch"))	
+	}
+	
+	
+	// ========= RENDER STYCKY ADVERT BLOCK======================
+	function renderStickyBlock(){
+	const advert = document.createElement("div");
+	
+	advert.innerHTML = `
+     <div class="advert">
+         <h3 class="text-center"> Hello google</h3>
+         <p class="text-muted"> Some advert text will go here in the future.. </p>
+     </div>
+`
+	advert.style.cssText =`
+    height: 600px;
+    width: 300px;
+     background: #ffc10750;
+    margin-bottom: 50px;
+`;
+	
+	rightBarStickyBlock.append(advert);
+	rightBarStickyBlock.style.position = "sticky";
+	rightBarStickyBlock.style.top = "100px";
 	}
 	
 
