@@ -17,8 +17,16 @@ router.use(methodOverride("_method"));
 router.get("/articles", async(req, res) => {
 	
 	const allBlogs = await Blog.find({published: true});
-		
-	res.render("home", {allBlogs});
+	const data = {
+	  allBlogs, 
+	  title: "A kak tak",
+	  description: "Hello descriptions for the main page", 
+	  keywords: "Keywords for index page",
+	  robots: "index, follow",
+	  image: allBlogs[0].content[0].img
+	}
+
+	res.render("home", data );
 	
 });
 
@@ -29,8 +37,15 @@ router.get("/articles", async(req, res) => {
 router.get("/articles/unpublished", catchAsync(async(req, res, next ) => {
 	
 	const allBlogs = await Blog.find({published: false});
-		
-	res.render("home", {allBlogs});
+		const data = {
+	    	allBlogs, 
+		    title: "AKT Unpublished",
+		   description: false, 
+		    keywords: false, 
+			robots: "noindex",
+			image: false
+		 }
+	res.render("home", data);
 	
 }));
 
@@ -42,7 +57,15 @@ router.get("/articles/unpublished", catchAsync(async(req, res, next ) => {
 //=================== CREATE NEW BLOG/PAGE==================
 
 router.get("/articles/new", (req, res, next) => {
-	res.render("new");
+	const data = {  
+		title: "AKT Create NEW",
+	    description: false, 
+		keywords: false,
+		robots: "noindex",
+		image: false
+	 }
+	
+	res.render("new", data);
 });
 
 
@@ -76,8 +99,17 @@ router.get("/articles/:id/edit", async(req, res, next) => {
 	
 	
     const blog = await Blog.findById(req.params.id);
+	
+	const data = {  
+		blog,
+		title: "EDIT" + blog.title,
+	    description: false, 
+		keywords: false,
+		robots: "noindex",
+		image: false
+	 }
 
-	res.render("edit", { blog });	
+	res.render("edit", data);	
 });
 
 
@@ -116,12 +148,22 @@ router.get("/articles/:urlextention/:id", catchAsync( async(req, res, next) => {
 				}
 			}
 	
+	      const data = {
+			  foundPage,
+			  allBlogs: recent, 
+			  title: foundPage.seo.title,
+			  description: foundPage.seo.description,
+			  keywords: foundPage.seo.keywords,
+			  robots: "index, follow",
+			  image: foundPage.content[1].img
+		  };
+	
 		if ( foundPage.published == true){
 
-			res.render("show", {foundPage, allBlogs: recent});
+			res.render("show", data );
 		} else {
 			if (req.isAuthenticated()){
-			res.render("show", {foundPage, allBlogs: recent});
+			res.render("show", data);
 			} else {
 				req.flash("error", "We are currently updating information at this page.  Please try again later..")
 				res.redirect("/articles");

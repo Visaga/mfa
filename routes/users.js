@@ -14,7 +14,15 @@ const passport = require("passport");
 
 //  ================  REGISTER ======================
 router.get("/register", (req, res) => {
-	res.render("user/register");
+	const data = {
+		title: "Registar to AKT",
+		description: false,
+		keywords: false, 
+		image: false,
+		robots: "noindex"
+	}
+	
+	res.render("user/register",data);
 });
 
 
@@ -44,7 +52,15 @@ router.post("/register", catchAsync(async(req, res, next) => {
 
 //===========================LOGIN===================================
 router.get("/login", (req, res) => {
-	res.render("user/login");
+	const data = {
+		title: "Login to AKT",
+		description: false,
+		keywords: false, 
+		image: false,
+		robots: "noindex"
+	}
+	
+	res.render("user/login", data);
 });
 
 
