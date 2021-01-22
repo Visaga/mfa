@@ -4,19 +4,21 @@ const ejsMate = require("ejs-mate");  //for Layouts
 const methodOverride = require("method-override");
 const path = require("path");
 
-const blogRoutes = require("./routes/blogs.js")
+const ExpressError = require("./utils/ExpressError");
+const catchAsync = require("./utils/catchAsync");
+const flash = require("connect-flash");
+const session = require("express-session");
+
+const passport = require("passport");
+const localStrategy = require("passport-local");
+
+const blogRoutes = require("./routes/blogs.js");
+const usersRoutes = require("./routes/users");
 let isLoggedIn = true;  // temporary
 
 const mongoose = require("mongoose");
 const Blog     = require("./models/blog.js");
-
-
-
-
-
-
-
-//NEED TO ADD JS FUNCTION TO CREATE SOME CARDS TO SHOW AJAX LAZY LOAD. ROUTE IS DONE
+const User = require("./models/user");
 
 
 
@@ -33,36 +35,77 @@ app.use(methodOverride("_method"));
 
 app.use(express.static(path.join(__dirname, "public")));  
 
-mongoose.connect("mongodb://localhost: 27017/mfa", {
-	useNewUrlParser: true, 
-	useCreateIndex: true, 
-	useUnifiedTopology: true,
-	useFindAndModify: false
+
+const sessionConfig = {
+	secret: "This should be better secret! change it",
+	resave: false,
+	saveUninitialized: true,
+	cookie: {
+		httpOnly: true, //For Security reasons
+		expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+		maxAge: 1000 * 60 * 60 * 24 * 7
+	}
+	
+}
+
+app.use(session(sessionConfig));
+app.use(flash());
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new localStrategy(User.authenticate()));
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+
+app.get("/viewcount", (req, res) => {
+	
+	if (req.session.count){
+		req.session.count +=1;
+	} else {
+		req.session.count = 1;
+	}
+	res.send("STolko raz " + req.session.count)
 });
 
-const db = mongoose.connection;
 
-db.on("error", console.error.bind(console, "connectionerror: "));
-db.once("open", () => {
-	console.log(" DataBase Connected");
-})
+// mongoose.connect("mongodb://localhost: 27017/mfa", {
+// 	useNewUrlParser: true, 
+// 	useCreateIndex: true, 
+// 	useUnifiedTopology: true,
+// 	useFindAndModify: false
+// });
 
-// Blog.deleteMany({}).then(() => console.log("deleted")).catch(err => console.log(err));
+// const db = mongoose.connection;
 
-
-
-// Blog.create({published: true, title: "Trying to learn how to monetize your site, These 3 types of sites consistently perform well with AdSense.",urlExtention: "hujak koty ebuchie", content: [{text: "Do you want to learn how to monetize your website with Google AdSense? If so, the most basic of Google AdSense tips are what types of sites make the most money with Google AdSense. The simplest answer is a site that has a lot of content focused on a particular topic with a high volume of traffic. But more specifically, here are the three types of sites you should aim to create if you want to earn AdSense revenue.", img: "https://lh3.googleusercontent.com/IYFXKhClOyf6dF5RBKpIDUw8LwXCHcSjLOKio63-40vxK5W6qd8RzbYUQQLO_g2WlkgWnTWZjhuVZLB9tG8uBBJj0Pu-2rfXPDLp"},{text: "If you are not comfortable with the idea of creating your own content or managing content contributors, the next best type of site to generate AdSense revenue is a forum. Forums are places people go to discuss specific topics. For example, the following is catforum.com, dedicated to cat lovers everywhere and monetized with Google AdSense.This is a highly active forum with over one million posts and over 49,000 member. Non-paying members of the site will see Google AdSense ads when they come to login and throughout their visit in discussions.When it comes to forums, you will have to create content first, but instead of lengthy blog content, you will have to create discussions and find people to start engaging with you in those discussions. Over time, more and more people will come to discuss the topic of focus, and your visitors will ultimately start clicking on ads related to that topic. Just be sure to review special AdSense policies", img: "https://www.sciencemag.org/sites/default/files/styles/article_main_image_-_1280w__no_aspect_/public/cat_1280p_0.jpg?itok=ZPUkZ5_m"}], seo: {
-// 	description: "Ctoto pro Kotov",
-// 	keywords: "Pets, koty , hernia"
-// }})
-// .then((blog) => {
-// 	blog.save()
-// 	console.log(blog.seo)
+// db.on("error", console.error.bind(console, "connectionerror: "));
+// db.once("open", () => {
+// 	console.log(" Local DataBase Connected");
 // })
 
 
+//PRODACTION DB
+
+mongoose.connect("mongodb+srv://vobiar:1824Sania@cluster0.vxx8x.mongodb.net/<dbname>?retryWrites=true&w=majority", {
+	useNewUrlParser: true,
+	useCreateIndex: true,
+	useUnifiedTopology: true
+}).then(() => {
+	console.log(" BE CAREFULL: Connected to PRODACTION DB")
+}).catch(err => {
+	console.log("Something whent wrong!")
+    console.log(err.message)
+});
 
 
+
+app.use((req, res, next) => {
+	res.locals.success = req.flash('success');
+	res.locals.error = req.flash('error');
+	res.locals.currentUser = req.user;
+	next();
+});
 
 
 //============ROUTES=============================
@@ -70,6 +113,7 @@ db.once("open", () => {
 
 // ROUTES 
 app.use("/", blogRoutes);
+app.use("/", usersRoutes);
 
 
 
@@ -77,7 +121,9 @@ app.use("/", blogRoutes);
 app.get("/", (req, res) => res.redirect("/articles"));
 
 
-
+app.get("/err", (req, res) => {
+	throw new ExpressError("Oshibka, 500", 500);
+});
 
 
 
@@ -85,6 +131,15 @@ app.get("/", (req, res) => res.redirect("/articles"));
 app.all("*", (req, res) => {
 	res.status(404).send("PAGE NOT FOUND")
 })
+
+
+
+app.use((err, req, res, next) => {
+	const {message = "Oops, Something Went Wrong!", statusCode = 500} = err;
+	
+	if (!err.message){err.message = "Oh No, Something Went Wrong!"}
+	res.status(statusCode).send(message)
+});
 
 
 

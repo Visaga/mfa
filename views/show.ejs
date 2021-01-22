@@ -16,13 +16,13 @@
 </div>
 		<% } %>
 		
-		 <h1 class="text-start"> <%= foundPage.title %> </h1>
+		 <h1 class="text-start"> <%- foundPage.title %> </h1>
 			<time class="text-muted" datetime="<%= foundPage.date %>">Date Created: <%= foundPage.date %></time>
 	        
 	<div class=" mb-5">
 		<% foundPage.content.forEach(abstract => { %>
 		
-		     <h4 class=" m-3"> <strong><%= abstract.subtitle %></strong></h4>
+		     <h4 class=" mt-5"> <strong><%- abstract.subtitle %></strong></h4>
 			<p class="text-left mb-3"><%- abstract.text %></p>
 		    <div >
 				
@@ -40,7 +40,10 @@
 			<category class="text-muted" > category/<span id="category"><%= foundPage.category %></span></category>
 		</div>
 		
+		<% if (currentUser){ %>
 	 <a href="/articleS/<%= foundPage._id%>/edit" class="btn btn-primary">Edit</a>
+		<% } %>
+		
 		
 		<div class="container-fluid bg-light p-5 mt-5 mb-5 ">
 			<button type="button" class="btn btn-primary">

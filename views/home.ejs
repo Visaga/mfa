@@ -8,13 +8,15 @@
   <div class="card mb-3" style="width: 18rem;" >
   <img src="<%= blog.content[0].img %>" class="card-img-top" alt="fotka">
   <div class="card-body">
-    <h5 class="card-title"><%= blog.title %></h5>
+    <h5 class="card-title"><%- blog.title %></h5>
 	  
-    <p class="card-text"><%= blog.content[0].text.slice(0,90) + "..." %></p>
+    <p class="card-text"><%- blog.content[0].text.slice(0,90) + "..." %></p>
 	  <div class="d-flex justify-content-between">
 		   <a href="/articles/<%= blog.urlExtention.replace(/ /g, "-")%>/<%= blog._id%>" class="btn btn-primary">Read more</a>
 	  <form action="/articles/<%= blog._id %>/?_method=DELETE" method="POST">
+		  <% if (currentUser){ %>
 		  <input type="submit" class="btn btn-danger" value="DELETE">
+		  <% } %>
 	  </form>
 	  </div>
   </div>
