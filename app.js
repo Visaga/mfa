@@ -70,33 +70,34 @@ app.get("/viewcount", (req, res) => {
 });
 
 
-mongoose.connect("mongodb://localhost: 27017/mfa", {
-	useNewUrlParser: true, 
-	useCreateIndex: true, 
-	useUnifiedTopology: true,
-	useFindAndModify: false
-});
+// mongoose.connect("mongodb://localhost: 27017/mfa", {
+// 	useNewUrlParser: true, 
+// 	useCreateIndex: true, 
+// 	useUnifiedTopology: true,
+// 	useFindAndModify: false
+// });
 
-const db = mongoose.connection;
+// const db = mongoose.connection;
 
-db.on("error", console.error.bind(console, "connectionerror: "));
-db.once("open", () => {
-	console.log(" Local DataBase Connected");
-})
+// db.on("error", console.error.bind(console, "connectionerror: "));
+// db.once("open", () => {
+// 	console.log(" Local DataBase Connected");
+// })
 
 
 //PRODACTION DB
 
-// mongoose.connect("mongodb+srv://vobiar:1824Sania@cluster0.vxx8x.mongodb.net/<dbname>?retryWrites=true&w=majority", {
-// 	useNewUrlParser: true,
-// 	useCreateIndex: true,
-// 	useUnifiedTopology: true
-// }).then(() => {
-// 	console.log(" BE CAREFULL: Connected to PRODACTION DB")
-// }).catch(err => {
-// 	console.log("Something whent wrong!")
-//     console.log(err.message)
-// });
+mongoose.connect("mongodb+srv://vobiar:1824Sania@cluster0.vxx8x.mongodb.net/<dbname>?retryWrites=true&w=majority", {
+	useNewUrlParser: true,
+	useCreateIndex: true,
+	useUnifiedTopology: true,
+	useFindAndModify: false
+}).then(() => {
+	console.log(" BE CAREFULL: Connected to PRODACTION DB")
+}).catch(err => {
+	console.log("Something whent wrong!")
+    console.log(err.message)
+});
 
 
 

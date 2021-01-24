@@ -71,18 +71,19 @@ router.get("/articles/new", (req, res, next) => {
 
 router.post("/articles", catchAsync(async(req, res) => {
     const nowDate = new Date();
-	
-	
     const date = `${ nowDate.getFullYear() }-${ addZero(nowDate.getMonth() + 1 )}-${ addZero(nowDate.getDate()) }` 
 	   
 	function addZero(n){
 		return n = n < 10 ? "0" + n : n;
 	}
-	
 	req.body.blog.date = date;
 
 	
+	
+	
 	const newBlog = await new Blog(req.body.blog);
+	newBlog.views.all = 0;
+	newBlog.views.unic = 0;
 	
 	newBlog.save();
 	
@@ -155,11 +156,21 @@ router.get("/articles/:urlextention/:id", catchAsync( async(req, res, next) => {
 			  description: foundPage.seo.description,
 			  keywords: foundPage.seo.keywords,
 			  robots: "index, follow",
-			  image: foundPage.content[1].img
+			  image: foundPage.content[0].img 
 		  };
 	
 		if ( foundPage.published == true){
-
+			
+			/////////////////////////////////counting views
+			if (req.session.count){
+		         foundPage.views.all += 1;
+	           } else {
+		        req.session.count = 1;
+				foundPage.views.unic += 1
+	        }
+			
+			Blog.findByIdAndUpdate( req.params.id, foundPage).catch(err => console.log("fail to count"));
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			res.render("show", data );
 		} else {
 			if (req.isAuthenticated()){

@@ -1,15 +1,17 @@
 <% layout("/layouts/boilerplate") %>
 
 <div class="row">
-	<div class="col-xxl-1 fixed-top d-none d-xxl-block">
-		<btn class="btn btn-primary bt-5">F</btn>
+	<div class="fixed-top d-none d-xxl-flex flex-column justify-content-center align-items-center" style="width: 100px; height: 100%; z-index: 0;">
+		<btn class="btn btn-primary m-3 ">F</btn>
+		<btn class="btn btn-primary m-3 ">U <%= foundPage.views.unic %> </btn>
+		<btn class="btn btn-primary m-3 ">all <%= foundPage.views.all %></btn>
 	</div>
 	
 <!-- 	
 	////// -->
 	
 	
-	<div class="col-xl-8 col-lg-12"  id="main-content">
+	<div class="col-xl-8 col-lg-12 "  id="main-content">
 		 <% if (foundPage.published == false) { %>
 		     <div class="alert alert-danger" role="alert">
   NOT PUBLISHED YET!
@@ -45,14 +47,19 @@
 		<% } %>
 		
 		
-		<div class="container-fluid bg-light p-5 mt-5 mb-5 ">
+		<div class="container-fluid bg-light p-5 mt-5 mb-5">
 			<button type="button" class="btn btn-primary">
-  Share  <span class="badge bg-secondary">Facebook</span>
+    @ <span >Поделиться на Facebook</span>
   <span class="visually-hidden">unread messages</span>
 </button>
 			
 			<button type="button" class="btn btn-primary">
-  Share  Vkontakte<span class="badge bg-secondary"></span>
+ @ <span class="mr-3">Рассказать ВКонтакте</span>
+  <span class="visually-hidden">unread messages</span>
+</button>
+			
+			<button type="button" class="btn btn-secondary">
+ @ <span class=" mr-3"><%= foundPage.views.all%></span>
   <span class="visually-hidden">unread messages</span>
 </button>
 		</div>
