@@ -5,13 +5,14 @@ const Schema = mongoose.Schema;
 
 const BlogSchema = new Schema ({
     title: {type: String, require: true},
-	date: String,
+	createdDate: Date,
+	modifiedDate: Date,
 	urlExtention: {type: String, require: true},
 	published: Boolean,
 	category: String,       // NEED TO ADD SEARCH BY CATEGORY AND SHOW ONLY IF PUBLISHED TRUE
 	views: {
-		unic: Number,
-		all: Number
+		unic:{type: Number, default: 0},
+		all: {type: Number, default: 0}
 	},
 	
 	content: {type: [{
@@ -23,7 +24,8 @@ const BlogSchema = new Schema ({
 	seo: {
 		title: String,
 		description: String,
-		keywords: String
+		keywords: String,
+		
 	}
 	
 });

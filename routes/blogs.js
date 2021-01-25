@@ -13,17 +13,26 @@ router.use(methodOverride("_method"));
 
 
 
+
+
 //=====================HOME ===============================
 router.get("/articles", async(req, res) => {
 	
 	const allBlogs = await Blog.find({published: true});
 	const data = {
 	  allBlogs, 
-	  title: "A kak tak",
-	  description: "Hello descriptions for the main page", 
-	  keywords: "Keywords for index page",
-	  robots: "index, follow",
-	  image: allBlogs[0].content[0].img
+		title: "A kak tak",
+		seoTags: {
+			  canonical: true,
+			  url: "https://",
+			  published: false,
+			  modified: false,
+			  type: "website",
+			  description: "Hello descriptions for the main page", 
+			  keywords: "Keywords for index page",
+			  robots: "index, follow",
+			  image: allBlogs[0].content[0].img	
+		}
 	}
 
 	res.render("home", data );
@@ -40,10 +49,7 @@ router.get("/articles/unpublished", catchAsync(async(req, res, next ) => {
 		const data = {
 	    	allBlogs, 
 		    title: "AKT Unpublished",
-		   description: false, 
-		    keywords: false, 
-			robots: "noindex",
-			image: false
+		   seoTags: false
 		 }
 	res.render("home", data);
 	
@@ -59,10 +65,7 @@ router.get("/articles/unpublished", catchAsync(async(req, res, next ) => {
 router.get("/articles/new", (req, res, next) => {
 	const data = {  
 		title: "AKT Create NEW",
-	    description: false, 
-		keywords: false,
-		robots: "noindex",
-		image: false
+	   seoTags: false
 	 }
 	
 	res.render("new", data);
@@ -70,13 +73,13 @@ router.get("/articles/new", (req, res, next) => {
 
 
 router.post("/articles", catchAsync(async(req, res) => {
-    const nowDate = new Date();
-    const date = `${ nowDate.getFullYear() }-${ addZero(nowDate.getMonth() + 1 )}-${ addZero(nowDate.getDate()) }` 
+	// const nowDate = new Date();
+	// const date = `${ nowDate.getFullYear() }-${ addZero(nowDate.getMonth() + 1 )}-${ addZero(nowDate.getDate()) }` 
 	   
-	function addZero(n){
-		return n = n < 10 ? "0" + n : n;
-	}
-	req.body.blog.date = date;
+	// function addZero(n){
+	// 	return n = n < 10 ? "0" + n : n;
+	// }
+	req.body.blog.createdDate = new Date();
 
 	
 	
@@ -104,10 +107,7 @@ router.get("/articles/:id/edit", async(req, res, next) => {
 	const data = {  
 		blog,
 		title: "EDIT" + blog.title,
-	    description: false, 
-		keywords: false,
-		robots: "noindex",
-		image: false
+	    seoTags: false
 	 }
 
 	res.render("edit", data);	
@@ -117,6 +117,7 @@ router.get("/articles/:id/edit", async(req, res, next) => {
 
 router.put("/articles/:id", catchAsync( async( req, res, next)  => {
 	
+	   req.body.blog.modifiedDate = new Date();
 	   await Blog.findByIdAndUpdate( req.params.id, req.body.blog );
 		
 	const  updated = await Blog.findById(req.params.id);	
@@ -152,11 +153,19 @@ router.get("/articles/:urlextention/:id", catchAsync( async(req, res, next) => {
 	      const data = {
 			  foundPage,
 			  allBlogs: recent, 
+			  seoTags: {
+					  canonical: true,
+					  url: `https://domen.com/articles/${req.params.urlextention}/${req.params.id}`,
+					  published: foundPage.createdDate,
+					  modified: foundPage.modifiedDate,
+					  type: "article",
+					  description: foundPage.seo.description, 
+					  keywords: foundPage.seo.keywords,
+					  robots: "index, follow",
+					  image: foundPage.content[0].img 
+		},
 			  title: foundPage.seo.title,
-			  description: foundPage.seo.description,
-			  keywords: foundPage.seo.keywords,
-			  robots: "index, follow",
-			  image: foundPage.content[0].img 
+			 
 		  };
 	
 		if ( foundPage.published == true){
@@ -167,6 +176,7 @@ router.get("/articles/:urlextention/:id", catchAsync( async(req, res, next) => {
 	           } else {
 		        req.session.count = 1;
 				foundPage.views.unic += 1
+				foundPage.views.all += 1;
 	        }
 			
 			Blog.findByIdAndUpdate( req.params.id, foundPage).catch(err => console.log("fail to count"));

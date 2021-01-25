@@ -16,10 +16,7 @@ const passport = require("passport");
 router.get("/register", (req, res) => {
 	const data = {
 		title: "Registar to AKT",
-		description: false,
-		keywords: false, 
-		image: false,
-		robots: "noindex"
+		seoTags: false
 	}
 	
 	res.render("user/register",data);
@@ -54,10 +51,7 @@ router.post("/register", catchAsync(async(req, res, next) => {
 router.get("/login", (req, res) => {
 	const data = {
 		title: "Login to AKT",
-		description: false,
-		keywords: false, 
-		image: false,
-		robots: "noindex"
+		seoTags: false
 	}
 	
 	res.render("user/login", data);
