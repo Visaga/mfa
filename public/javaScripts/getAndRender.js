@@ -63,11 +63,34 @@ const category = document.querySelector("#category").textContent;
 	
 	function renderBlogs(parrent, data, blogSize = ["col-sm-12"]){
 		 
-		data.forEach(blog => {
+		data.forEach((blog, ind) => {
 			const blogPreview = document.createElement("div");
 			       
 			blogSize.forEach(size => blogPreview.classList.add(size));
 			
+// 			if (ind % 2 == 0){
+// 				const advert = document.createElement("div");
+// 				advert.style.cssText = `
+//                max-width: 100%;
+//                min-width: 80%;
+//                max-height: 700px;
+//                min-height: 300px;
+// `
+// 				advert.innerHTML = `
+// 						<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+// 						<!-- rightBar -->
+// 						<ins class="adsbygoogle"
+// 							 style="display:block"
+// 							 data-ad-client="ca-pub-9771995363948446"
+// 							 data-ad-slot="2816459747"
+// 							 data-ad-format="auto"
+// 							 data-full-width-responsive="true"></ins>
+// 						<script>
+// 							 (adsbygoogle = window.adsbygoogle || []).push({});
+// 						</script>
+// `
+// 				parrent.append(advert);
+// 			} 
 			blogPreview.innerHTML = `
 				<a href="/articles/${blog.urlExtention.replace(/ /g, "-") }/${ blog._id }" class="text-decoration-none text-dark">
 					 <div>
@@ -75,12 +98,13 @@ const category = document.querySelector("#category").textContent;
 							 <img src="${ blog.content[0].img }" class="card-img-top" alt="${ blog.title }">
 							<div class="card-body">
 							<h5 class="card-title"> ${ blog.title }..</h5> 
-							  <time class="text-muted " datetime>${ blog.date }.</time>
+							  <time class="text-muted " datetime>${ blog.createdDate.toLocaleString().slice(0,10) }.</time>
 						 </div>
 
 						</div>
 					</div>
 				</a>`
+			
 			parrent.append(blogPreview);
 		});
 	}
@@ -103,8 +127,17 @@ const category = document.querySelector("#category").textContent;
 	
 	advert.innerHTML = `
      <div class="advert">
-         <h3 class="text-center"> Hello google</h3>
-         <p class="text-muted"> Some advert text will go here in the future.. </p>
+         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- sticyAd -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-9771995363948446"
+     data-ad-slot="8260358110"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
      </div>
 `
 	advert.style.cssText =`
