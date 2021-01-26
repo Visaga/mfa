@@ -19,8 +19,6 @@ const category = document.querySelector("#category").textContent;
 	.finally(() => { renderStickyBlock() });
 	
 	
-	
-
 
 	
 	
@@ -28,7 +26,7 @@ const category = document.querySelector("#category").textContent;
 	
 	//------settings-----
 	const blogsPerRequest = 10;
-	const blogSize = ["col-sm-6", "col-md-4", "col-lg-3"];
+	const blogSize = ["col-sm-6", "col-lg-4","col-xl-3"];
 	let inProgress = false;
 	let startFrom = 0;
 	//-------------------
@@ -94,10 +92,10 @@ const category = document.querySelector("#category").textContent;
 			blogPreview.innerHTML = `
 				<a href="/articles/${blog.urlExtention.replace(/ /g, "-") }/${ blog._id }" class="text-decoration-none text-dark">
 					 <div>
-							<div class="card mb-3">
+							<div class="card mb-3 shadow-sm" >
 							 <img src="${ blog.content[0].img }" class="card-img-top" alt="${ blog.title }">
 							<div class="card-body">
-							<h5 class="card-title"> ${ blog.title }..</h5> 
+							<h5 class="card-title"> ${ blog.title.slice(0,35) }..</h5> 
 							  <time class="text-muted " datetime>${ blog.createdDate.toLocaleString().slice(0,10) }.</time>
 						 </div>
 
@@ -126,6 +124,8 @@ const category = document.querySelector("#category").textContent;
 	const advert = document.createElement("div");
 	
 	advert.innerHTML = `
+     <img src="https://sun9-31.userapi.com/impf/c836122/v836122425/289e/4gzd6iCxgK8.jpg?size=429x1080&quality=96&proxy=1&sign=ed133ccebc8ac00865808190968a4daa&type=album" width="100%">
+
      <div class="advert">
          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- sticyAd -->
@@ -141,8 +141,9 @@ const category = document.querySelector("#category").textContent;
      </div>
 `
 	advert.style.cssText =`
-    height: 600px;
-    width: 300px;
+    min-height: 600px;
+    width: 330px;
+    max-width: 100%;
      background: #ffc10750;
     margin-bottom: 50px;
 `;

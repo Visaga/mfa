@@ -73,16 +73,9 @@ router.get("/articles/new", (req, res, next) => {
 
 
 router.post("/articles", catchAsync(async(req, res) => {
-	// const nowDate = new Date();
-	// const date = `${ nowDate.getFullYear() }-${ addZero(nowDate.getMonth() + 1 )}-${ addZero(nowDate.getDate()) }` 
-	   
-	// function addZero(n){
-	// 	return n = n < 10 ? "0" + n : n;
-	// }
+	
 	req.body.blog.createdDate = new Date();
 
-	
-	
 	
 	const newBlog = await new Blog(req.body.blog);
 	newBlog.views.all = 0;
@@ -171,10 +164,10 @@ router.get("/articles/:urlextention/:id", catchAsync( async(req, res, next) => {
 		if ( foundPage.published == true){
 			
 			/////////////////////////////////counting views
-			if (req.session.count){
+			if (req.session[req.params.id]){
 		         foundPage.views.all += 1;
 	           } else {
-		        req.session.count = 1;
+		        req.session[req.params.id] = 1;
 				foundPage.views.unic += 1
 				foundPage.views.all += 1;
 	        }

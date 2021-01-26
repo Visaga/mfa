@@ -1,10 +1,15 @@
 <% layout("/layouts/boilerplate") %>
 
-<div class="row">
+
+
+
+
+<div class="row ">
 	<div class="fixed-top d-none d-xxl-flex flex-column justify-content-center align-items-center" style="width: 100px; height: 100%; z-index: 0;">
-		<btn class="btn btn-primary m-3 ">F</btn>
-		<btn class="btn btn-primary m-3 ">U <%= foundPage.views.unic %> </btn>
-		<btn class="btn btn-primary m-3 ">all <%= foundPage.views.all %></btn>
+		<!-- uSocial -->
+<script defer src="https://usocial.pro/usocial/usocial.js?uid=6cb7e3549df58479&v=6.1.5" data-script="usocial" charset="utf-8"></script>
+<div class="uSocial-Share" data-lang="en" data-pid="12c917de4e0f1ddbd200197eb0613643" data-type="share" data-options="round-rect,style1,default,left,bg,slide-down,size48,eachCounter0,counter1,counter-after,upArrow-left" data-social="vk,telegram,fb,vi,wa"></div>
+<!-- /uSocial -->
 	</div>
 	
 <!-- 	
@@ -19,9 +24,9 @@
 		<% } %>
 		
 		 <h1 class="text-start"> <%- foundPage.title %> </h1>
-			<time class="text-muted mr-3" datetime="<%= foundPage.createdDate %>">Created: <%= foundPage.createdDate.toLocaleString() %></time>
+			<time class="text-muted mr-3 " datetime="<%= foundPage.createdDate %>"> Created: <%= foundPage.createdDate.toLocaleString() %></time>
 		<% if (foundPage.modifiedDate){ %>
-		<time class="text-muted mr-3" datetime="<%= foundPage.modifiedDate %>">Updated: <%= foundPage.modifiedDate.toLocaleString() %></time>
+		<time class="text-muted mr-3" datetime="<%= foundPage.modifiedDate %>"> Updated: <%= foundPage.modifiedDate.toLocaleString() %></time>
 	        <%}%>
 	<div class=" mb-5">
 		<% foundPage.content.forEach(abstract => { %>
@@ -31,7 +36,7 @@
 		    <div>
 				
 				<% if ( abstract.img){ %>
-				<img class="img-fluid mb-2" src="<%= abstract.img %>"  alt="<%= abstract.alt %>">
+				<img class="img-fluid mb-2 img-thumbnail shadow-sm" src="<%= abstract.img %>"  alt="<%= abstract.alt %>">
 				<% } else{ %> 
 				<hr> 
 				<% } %>
@@ -39,9 +44,10 @@
 		
 		<% }) %>
 		
-		<div class="d-flex justify-content-between">
-			<category class="text-muted"> @London Bus</category>
-			<category class="text-muted" > category/<span id="category"><%= foundPage.category %></span></category>
+		<div class="d-flex justify-content-between p-3 bg-light">
+			<avtor class="text-muted"> © London Bus</avtor>
+			<category class="text-muted" > category / <span id="category"><%= foundPage.category %></span></category>
+			<span class=" text-muted mr-3"> &#128065; <%= foundPage.views.all%> / <%= foundPage.views.unic%></span>
 		</div>
 		
 		<% if (currentUser){ %>
@@ -49,21 +55,14 @@
 		<% } %>
 		
 		
-		<div class="container-fluid bg-light p-5 mt-5 mb-5">
-			<button type="button" class="btn btn-primary">
-    @ <span >Поделиться на Facebook</span>
-  <span class="visually-hidden">unread messages</span>
-</button>
+		<div class="container-fluid   mt-5 mb-5 d-flex justify-content-between">
 			
-			<button type="button" class="btn btn-primary">
- @ <span class="mr-3">Рассказать ВКонтакте</span>
-  <span class="visually-hidden">unread messages</span>
-</button>
-			
-			<button type="button" class="btn btn-secondary">
- @ <span class=" mr-3"><%= foundPage.views.all%></span>
-  <span class="visually-hidden">unread messages</span>
-</button>
+		<div>
+			<!-- uSocial -->
+<script defer src="https://usocial.pro/usocial/usocial.js?uid=95bea78d30f58479&v=6.1.5" data-script="usocial" charset="utf-8"></script>
+<div class="uSocial-Share shadow" data-lang="en" data-pid="5bd72a260ab379ebbe8b65c31ec55431" data-type="share" data-options="round-rect,style1,default,absolute,horizontal,size48,eachCounter0,counter1,counter-after" data-social="fb,vi,telegram,wa,vk,spoiler"></div>
+<!-- /uSocial -->
+			</div>
 		</div>
 	</div>
 	</div>
@@ -85,9 +84,11 @@
 	
 	
 
+	<div class="shadow-lg bg-light mb-5" style="width: 300px; height: 1px ; margin: 0 auto;" ></div>
+	<div>
+		<div class=" row col-xs-12 d-flex flex-wrap" id="lazyLoadingBlock"></div>
+	</div>
 	
-	
-	<div class=" row col-xs-12 d-flex flex-wrap justify-content-around " id="lazyLoadingBlock"></div>
 	
 	
 </div>
