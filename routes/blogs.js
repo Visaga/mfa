@@ -24,7 +24,7 @@ router.get("/articles", async(req, res) => {
 		title: "A kak tak",
 		seoTags: {
 			  canonical: true,
-			  url: "https://",
+			  url: "http://buduznat.ru",
 			  published: false,
 			  modified: false,
 			  type: "website",
@@ -148,7 +148,7 @@ router.get("/articles/:urlextention/:id", catchAsync( async(req, res, next) => {
 			  allBlogs: recent, 
 			  seoTags: {
 					  canonical: true,
-					  url: `https://domen.com/articles/${req.params.urlextention}/${req.params.id}`,
+					  url: `http://buduznat.ru/articles/${req.params.urlextention}/${req.params.id}`,
 					  published: foundPage.createdDate,
 					  modified: foundPage.modifiedDate,
 					  type: "article",
