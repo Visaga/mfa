@@ -144,6 +144,6 @@ app.use((err, req, res, next) => {
 
 
 
-// app.listen("5000", () => console.log("SERVER STARTED!!!"));
+app.listen("5000", () => console.log("SERVER STARTED!!!"));
 
-app.listen(process.env.PORT, '0.0.0.0')
+// app.listen(process.env.PORT, '184.168.131.241')
