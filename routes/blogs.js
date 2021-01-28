@@ -21,7 +21,7 @@ router.get("/articles", async(req, res) => {
 	const allBlogs = await Blog.find({published: true});
 	const data = {
 	  allBlogs, 
-		title: "A kak tak",
+		title: "Буду Знать",
 		seoTags: {
 			  canonical: true,
 			  url: "http://buduznat.ru",

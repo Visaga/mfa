@@ -30,9 +30,15 @@
 	        <%}%>
 	<div class=" mb-5">
 		<% foundPage.content.forEach(abstract => { %>
-		
+		     <% if ( abstract.subtitle.length){ %>
 		     <h4 class=" mt-5"> <strong><%- abstract.subtitle %></strong></h4>
+		     <% } %>
+		
+		<% if ( abstract.text.length){ %>
 			<p class="text-left mb-3"><%- abstract.text %></p>
+		<% } %>
+		
+		
 		    <div>
 				
 				<% if ( abstract.img){ %>
@@ -45,7 +51,7 @@
 		<% }) %>
 		
 		<div class="d-flex justify-content-between p-3 bg-light">
-			<avtor class="text-muted"> © London Bus</avtor>
+			<avtor class="text-muted"> © Буду Знать</avtor>
 			<category class="text-muted" > category / <span id="category"><%= foundPage.category %></span></category>
 			<span class=" text-muted mr-3"> &#128065; <%= foundPage.views.all%> / <%= foundPage.views.unic%></span>
 		</div>
