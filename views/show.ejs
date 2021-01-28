@@ -24,6 +24,8 @@
 		<% } %>
 		
 		 <h1 class="text-start"> <%- foundPage.title %> </h1>
+		
+		
 			<time class="text-muted mr-3 " datetime="<%= foundPage.createdDate %>"> Created: <%= foundPage.createdDate.toLocaleString() %></time>
 		<% if (foundPage.modifiedDate){ %>
 		<time class="text-muted mr-3" datetime="<%= foundPage.modifiedDate %>"> Updated: <%= foundPage.modifiedDate.toLocaleString() %></time>
