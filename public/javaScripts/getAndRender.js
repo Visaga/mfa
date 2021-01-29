@@ -14,7 +14,7 @@ const category = document.querySelector("#category").textContent;
 	//Render some blocks to Right Bar
 	
 	getBlogs(0,5,category)
-	.then(data => renderBlogs(rightBarBlocks, data))
+	.then(data => renderBlogs(rightBarBlocks, data, "nofollow"))
 	.catch(err => console.log("Problem to load right bar content.. : " + err))
 	.finally(() => { renderStickyBlock() });
 	
@@ -40,7 +40,7 @@ const category = document.querySelector("#category").textContent;
 			.then(data => {
 				if (data.length > 0){
 					data = data.reverse();
-					renderBlogs(lazyLoadingBlock, data, blogSize);
+					renderBlogs(lazyLoadingBlock, data, " ",blogSize);
 				} 
 				return data;
 			})
@@ -59,9 +59,14 @@ const category = document.querySelector("#category").textContent;
 	
 	//RENDER RECEIVED BLOGS
 	
-	function renderBlogs(parrent, data, blogSize = ["col-sm-12"]){
+	function renderBlogs(parrent, data,rel = " ", blogSize = ["col-sm-12"], ){
+		const currentBlogTitle = document.getElementById("title").innerText;
+		console.log(currentBlogTitle)
 		 
 		data.forEach((blog, ind) => {
+			if (blog.title != currentBlogTitle){
+				console.log(blog.title)
+				
 			const blogPreview = document.createElement("div");
 			       
 			blogSize.forEach(size => blogPreview.classList.add(size));
@@ -89,8 +94,9 @@ const category = document.querySelector("#category").textContent;
 // `
 // 				parrent.append(advert);
 // 			} 
+			const relAt = `rel="${ rel }"`
 			blogPreview.innerHTML = `
-				<a href="/articles/${blog.urlExtention.replace(/ /g, "-") }/${ blog._id }" class="text-decoration-none text-dark">
+				<a ${ rel } href="/articles/${blog.urlExtention.replace(/ /g, "-") }/${ blog._id }" class="text-decoration-none text-dark">
 					 <div>
 							<div class="card mb-3 shadow-sm" >
 							 <img src="${ blog.content[0].img }" class="card-img-top" alt="${ blog.title }">
@@ -104,6 +110,7 @@ const category = document.querySelector("#category").textContent;
 				</a>`
 			
 			parrent.append(blogPreview);
+			}
 		});
 	}
 	
