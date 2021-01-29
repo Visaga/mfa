@@ -16,7 +16,7 @@
 	////// -->
 	
 	
-	<div class="col-xl-8 col-lg-12 "  id="main-content">
+	<div class="col-xl-8 col-lg-12 shadow-sm "  id="main-content">
 		 <% if (foundPage.published == false) { %>
 		     <div class="alert alert-danger" role="alert">
   NOT PUBLISHED YET!
@@ -33,7 +33,7 @@
 	<div class=" mb-5">
 		<% foundPage.content.forEach(abstract => { %>
 		     <% if ( abstract.subtitle.length){ %>
-		     <h4 class=" mt-5"> <strong><%- abstract.subtitle %></strong></h4>
+		     <h2 class="mt-5" style="font-size: 1.5rem"> <%- abstract.subtitle %></h2>
 		     <% } %>
 		
 		<% if ( abstract.text.length){ %>

@@ -13,35 +13,35 @@ const passport = require("passport");
 
 
 //  ================  REGISTER ======================
-router.get("/register", (req, res) => {
-	const data = {
-		title: "Registar to AKT",
-		seoTags: false
-	}
+// router.get("/register", (req, res) => {
+// 	const data = {
+// 		title: "Registar to AKT",
+// 		seoTags: false
+// 	}
 	
-	res.render("user/register",data);
-});
+// 	res.render("user/register",data);
+// });
 
 
-router.post("/register", catchAsync(async(req, res, next) => {
-	try{
-	const { email, username, password} = req.body;
-	const user = new User({email, username});
-	const newUser = await User.register(user, password);
-	req.login(newUser, (err)=> {
-		if (err){
-			return next(err);
-		}
-	})	
+// router.post("/register", catchAsync(async(req, res, next) => {
+// 	try{
+// 	const { email, username, password} = req.body;
+// 	const user = new User({email, username});
+// 	const newUser = await User.register(user, password);
+// 	req.login(newUser, (err)=> {
+// 		if (err){
+// 			return next(err);
+// 		}
+// 	})	
 		
-	req.flash("success", `Hello ${username}! Welocome to the Yelpcamp!`);
-	res.redirect("/articles");
-	} catch(e) { 
-		req.flash("error", e.message);
-		res.redirect("/register");
-		return
-	}
-}));
+// 	req.flash("success", `Hello ${username}! Welocome to the Yelpcamp!`);
+// 	res.redirect("/articles");
+// 	} catch(e) { 
+// 		req.flash("error", e.message);
+// 		res.redirect("/register");
+// 		return
+// 	}
+// }));
 
 //===================================================================.
 
