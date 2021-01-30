@@ -25,7 +25,7 @@ router.get("/articles", async(req, res, next) => {
 		title: "Буду Знать",
 		seoTags: {
 			  canonical: true,
-			  url: "http://buduznat.ru",
+			  url: "http://buduznat.ru/articles",
 			  published: false,
 			  modified: false,
 			  type: "website",
