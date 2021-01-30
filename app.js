@@ -105,8 +105,10 @@ app.use((req, res, next) => {
 	res.locals.success = req.flash('success');
 	res.locals.error = req.flash('error');
 	res.locals.currentUser = req.user;
+	res.locals.currentUrl = req.url;
 	next();
 });
+
 
 
 //============ROUTES=============================
@@ -130,7 +132,9 @@ app.get("/err", (req, res) => {
 
 //If page doesn't exist comes generick message 
 app.all("*", (req, res) => {
-	res.status(404).send("PAGE NOT FOUND")
+	
+	
+	res.status(404).render("errors/notfound", {title: "404 PAGE NOT FOUIND", seoTags: false})
 })
 
 
@@ -139,7 +143,7 @@ app.use((err, req, res, next) => {
 	const {message = "Oops, Something Went Wrong!", statusCode = 500} = err;
 	
 	if (!err.message){err.message = "Oh No, Something Went Wrong!"}
-	res.status(statusCode).send(message)
+	res.status(statusCode).render("errors/error",{err, title: "Error", seoTags: false})
 });
 
 

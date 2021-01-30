@@ -16,7 +16,8 @@ router.use(methodOverride("_method"));
 
 
 //=====================HOME ===============================
-router.get("/articles", async(req, res) => {
+router.get("/articles", async(req, res, next) => {
+
 	
 	const allBlogs = await Blog.find({published: true});
 	const data = {
@@ -127,6 +128,7 @@ router.put("/articles/:id", catchAsync( async( req, res, next)  => {
 
 
 router.get("/articles/:urlextention/:id", catchAsync( async(req, res, next) => {
+	
 	
 	const foundPage = await Blog.findById(req.params.id);
 	
