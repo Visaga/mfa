@@ -10,6 +10,7 @@ const BlogSchema = new Schema ({
 	urlExtention: {type: String, require: true},
 	published: Boolean,
 	category: String,       // NEED TO ADD SEARCH BY CATEGORY AND SHOW ONLY IF PUBLISHED TRUE
+	promotion: false,
 	views: {
 		unic:{type: Number, default: 0},
 		all: {type: Number, default: 0}
