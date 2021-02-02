@@ -4,7 +4,7 @@
 
 
 
-<div class="row ">
+<div class="row pt-3">
 	<div class="fixed-top d-none d-xxl-flex flex-column justify-content-center align-items-center" style="width: 100px; height: 100%; z-index: 0;">
 		<!-- uSocial -->
 <script async src="https://usocial.pro/usocial/usocial.js?uid=0d29ac316bf58479&v=6.1.5" data-script="usocial" charset="utf-8"></script>
@@ -25,11 +25,14 @@
 		
 		 <h1 id="title" class="text-start"> <%- foundPage.title %> </h1>
 		
-		
-			<time class="text-muted mr-3 " datetime="<%= foundPage.createdDate %>"> Created: <%= foundPage.createdDate.toLocaleString() %></time>
+		<div  class="d-flex flex-wrap">
+			<time class="text-muted mr-3 d-block " datetime="<%= foundPage.createdDate %>"> Опубликовано: <%= foundPage.createdDate.toLocaleString() %></time>
 		<% if (foundPage.modifiedDate){ %>
-		<time class="text-muted mr-3" datetime="<%= foundPage.modifiedDate %>"> Updated: <%= foundPage.modifiedDate.toLocaleString() %></time>
+		<time class="text-muted mr-3 d-block" datetime="<%= foundPage.modifiedDate %>"> Изменено: <%= foundPage.modifiedDate.toLocaleString() %></time>
 	        <%}%>
+		</div>
+			
+		
 	<div class=" mb-5">
 		<% foundPage.content.forEach(abstract => { %>
 		     <% if ( abstract.subtitle.length){ %>
@@ -46,22 +49,25 @@
 				<% if ( abstract.img){ %>
 				<img class="img-fluid mb-2 img-thumbnail shadow-sm" src="<%= abstract.img %>"  alt="<%= abstract.alt %>">
 				<% } else{ %> 
-				<hr> 
+				
 				<% } %>
 		</div>
 		
 		<% }) %>
 		
-		<div class="d-flex justify-content-between  p-3 bg-light">
+		<div class="d-flex justify-content-between flex-wrap p-3 bg-light">
 			<avtor class="text-muted"> © Буду Знать</avtor>
 			<category class="text-muted" > category / <span id="category"><%= foundPage.category %></span></category>
 			
-			<div>
-			<span class=" text-muted mr-3"> &#128065; <%= foundPage.views.all%> / <%= foundPage.views.unic%></span>
-			<!-- uSocial -->
+			<div clas="container-fluid d-flex ">
+			<span class=" d-block text-muted mr-3"> &#128065; <%= foundPage.views.all%> / <%= foundPage.views.unic%></span>
+				<div>
+					<!-- uSocial -->
 <script async src="https://usocial.pro/usocial/usocial.js?uid=0a413d65bef58479&v=6.1.5" data-script="usocial" charset="utf-8"></script>
 <div class="uSocial-Like" data-lang="en" data-pid="779af406ca7643534527b0a9990c71f1" data-type="like" data-options="absolute,round-rect,horizontal" data-social="fb" data-appId-fb="459120748804212"></div>
 <!-- /uSocial -->
+				</div>
+			
 				</div>
 		</div>
 		

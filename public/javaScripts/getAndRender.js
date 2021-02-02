@@ -61,12 +61,10 @@ const category = document.querySelector("#category").textContent;
 	
 	function renderBlogs(parrent, data,rel = " ", blogSize = ["col-sm-12"], ){
 		const currentBlogTitle = document.getElementById("title").innerText;
-		console.log(currentBlogTitle)
-		 
+		
 		data.forEach((blog, ind) => {
 			if (blog.title != currentBlogTitle){
-				console.log(blog.title)
-				
+	
 			const blogPreview = document.createElement("div");
 			       
 			blogSize.forEach(size => blogPreview.classList.add(size));

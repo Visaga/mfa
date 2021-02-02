@@ -18,11 +18,29 @@ router.use(methodOverride("_method"));
 //=====================HOME ===============================
 router.get("/articles", async(req, res, next) => {
 
+	if (req.query.search){
+		
+		const regex = new RegExp(escapeRegex(req.query.search), "gi");
+		
+		const allBlogs = await Blog.find( {title: regex, published: true});
+		
+	const data = {
+	  allBlogs, 
+		title: "Буду Знать - Интересные и познавательные публикации.",
+		seoTags: false,
+		query: req.query.search
+	}
 	
+	
+
+	res.render("home", data );
+		
+	}else {
+
 	const allBlogs = await Blog.find({published: true});
 	const data = {
 	  allBlogs, 
-		title: "Буду Знать",
+		title: "Буду Знать - Интересные и познавательные публикации.",
 		seoTags: {
 			  canonical: true,
 			  url: "http://buduznat.ru/articles",
@@ -37,14 +55,14 @@ router.get("/articles", async(req, res, next) => {
 	}
 
 	res.render("home", data );
-	
+}	
 });
 
 
 
 // ====================== ALL UNPUBLISHED ==================
 
-router.get("/articles/unpublished", catchAsync(async(req, res, next ) => {
+router.get("/articles/unpublished",isLogedin, catchAsync(async(req, res, next ) => {
 	
 	const allBlogs = await Blog.find({published: false});
 		const data = {
@@ -234,7 +252,9 @@ router.delete("/articles/:id", catchAsync(async(req, res) => {
 
 
 
-
+function escapeRegex(string) {
+    return string.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+}
 
 
 module.exports = router;

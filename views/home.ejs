@@ -2,19 +2,60 @@
 
 
 <div class="row position-relative">
+	<div class="catigories d-flex justify-content-center bg-light p-1">
+		
+		<div class="catigories-wrapper d-flex">
+			<div>
+			<span class="">НОВОЕ</span>
+		</div>
+		<span class="pl-3 pr-3">|</span>
+		<div>
+			<span class=" ">ПОПУЛЯРНОЕ</span>
+		</div>
+		</div>
+		<div class="catigories-wrapper d-none d-md-flex">
+			<span class="pl-3 pr-3">|</span>
+			<div>
+			<span class="">ПУТЕШЕСТВИЯ</span>
+		</div>
+		<span class="pl-3 pr-3">|</span>
+		<div>
+			<span class="">СЕМЬЯ И ОТНОШЕНИЯ</span>
+		</div>
+		</div>
+		
+	</div>
 	
-	
+	<section class="col-sm-12 jumbotron p-0 position-relative">
+	<div class="d-flex justify-content-center flex-column" style="width: 100%; height: 350px; background: teal; margin-bottom: 50px; overflow: hidden; background: url(https://vuzopedia.ru/storage/app/uploads/public/5e3/ad8/3c2/5e3ad83c2d910735464979.jpg) 100% 100% no-repeat;background-size: cover;">
+		<h1 style="font-family: 'Caveat', cursive;" class="text-start text-light mb-3">Теперь ты будешь это знать..</h1>
+		
+		<form action="/articles/" method="GET" id="searchForm"  class="container d-none  d-md-flex d-xl-none position-absolute" style="width: 320px; bottom: 65px; right: 10px;">
+					  <input id="searchInput" class="form-control me-2" type="text" placeholder="Search" name="search" aria-label="Search">
+					  <button class="btn btn-success" type="submit">Search</button>
+					</form>
+		 
+		</div>
+		
+		
+	</section>
 	
 	<!-- =============main content============= -->
-	<div class="mainContent  col-xl-9">
-         <div class="container-fluid bg-light  rounded pb-1 shadow mb-1"><h1 style="font-family: 'Caveat', cursive;" class="text-start mb-3">Теперь ты будешь это знать..</h1></div>
+	<div class="mainContent shadow col-xl-9">
+         <!-- <div class="container-fluid bg-light  rounded pb-1 shadow mb-1"><h1 style="font-family: 'Caveat', cursive;" class="text-start mb-3">Теперь ты будешь это знать..</h1></div> -->
 	<div class=" d-flex justify-content-between flex-wrap">	
 		
 		
 		
 	
 			
+		<%if (allBlogs.length < 1){%>
 		
+		<div class=" container-fluid alert alert-danger alert-dismissible fade show" role="alert">
+		     Пo запросу <strong>"<%= query %>"</strong> ничего не найдено..
+		<button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
+</div>
+		<%}%>
 			<% allBlogs.forEach(blog =>{ %>
 		<!-- ======card/////////////////// -->
 <a href="/articles/<%= blog.urlExtention.replace(/ /g, "-")%>/<%= blog._id%>" class="text-decoration-none text-dark">
@@ -27,10 +68,16 @@
 								<div class="col-md-6 col-lg-8 d-block">
 									<div class="card-body">
 										<h5 class="card-title"><%- blog.title %></h5>
+										
+										<% if(blog.content[0].text.length > 0){ %>
 										<p class="card-text"><%- blog.content[0].text.slice(0,90) + "..." %></p>
+										<%} else {%>
+									    <p class="card-text"><%- blog.content[1].text.slice(0,90) + "..." %></p>
+										<%}%>
+										
 										<p class="card-text">	
 										 <small class="text-muted"><%= blog.createdDate.toLocaleString() %></small> 
-											<button  class="btn btn-primary">Read more</button>
+											<button  class="btn btn-primary float-right btn-sm">Read more</button>
 										</p>
 
 										 <div class="d-flex justify-content-between">
@@ -69,7 +116,7 @@
 	  
     
 	  <div class="d-flex justify-content-between">
-		   <a href="/articles/<%= blog.urlExtention.replace(/ /g, "-")%>/<%= blog._id%>" class="btn btn-primary">Read more</a>
+		   <a href="/articles/<%= blog.urlExtention.replace(/ /g, "-")%>/<%= blog._id%>" class="btn btn-primary btn-sm float-right">Read more</a>
 	  <form action="/articles/<%= blog._id %>/?_method=DELETE" method="POST">
 		  <% if (currentUser){ %>
 		  <input type="submit" class="btn btn-danger" value="DELETE">
@@ -89,8 +136,15 @@
 		<!-- ===================Aside bar============ -->
 		
 		<div class="asideBar bg-dark col-xl-3 d-none d-xl-flex flex-column position-relative" >
-			<div class="topBlock bg-secondary mb-5 mt-3"  style="height: 300px; max-width: 100%;">
-				
+			<div class="topBlock bg-secondary mb-5 mt-3 d-flex justify-content-center align-items-center"  style="height: 100px; max-width: 100%;">
+				 <div class="container-fluid ">
+					 
+					<form action="/articles/" method="GET" id="searchForm"  class="d-flex">
+					  <input id="searchInput" class="form-control me-2" type="text" placeholder="Search" name="search" aria-label="Search">
+					  <button class="btn btn-success" type="submit">Search</button>
+					</form>
+					 
+				  </div>
 			</div>
 			
 			<div class="position-sticky bg-light"  style=" top: 80px; max-width:100%; height: 500px;">
@@ -99,13 +153,10 @@
 		</div>
 		
 		
-		
 	
-		
-		
 </div>
 
 
-
+<script src="/javaScripts/search.js"></script>
 
 
