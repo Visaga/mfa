@@ -71,14 +71,21 @@
 										
 										<% if(blog.content[0].text.length > 0){ %>
 										<p class="card-text"><%- blog.content[0].text.slice(0,90) + "..." %></p>
-										<%} else {%>
+										<%} else if(blog.content[1] && blog.content[1].text.length > 0) {%>
 									    <p class="card-text"><%- blog.content[1].text.slice(0,90) + "..." %></p>
+										<%} else{%>
+										<p>
+											 "no text"
+										</p>
 										<%}%>
-										
 										<p class="card-text">	
-										 <small class="text-muted"><%= blog.createdDate.toLocaleString() %></small> 
+										 <small class="text-muted"><%= blog.createdDate.toLocaleString() %></small>
+									
 											<button  class="btn btn-primary float-right btn-sm">Read more</button>
 										</p>
+										<div>
+											<span class="text-muted">&#128065; <%=blog.views.all%></span>
+										</div>
 
 										 <div class="d-flex justify-content-between">
 										  <form action="/articles/<%= blog._id %>/?_method=DELETE" method="POST">
@@ -117,11 +124,13 @@
     
 	  <div class="d-flex justify-content-between">
 		   <a href="/articles/<%= blog.urlExtention.replace(/ /g, "-")%>/<%= blog._id%>" class="btn btn-primary btn-sm float-right">Read more</a>
-	  <form action="/articles/<%= blog._id %>/?_method=DELETE" method="POST">
+		  <span class="text-muted">&#128065; <%=blog.views.all%></span>
+		  
 		  <% if (currentUser){ %>
+	  <form action="/articles/<%= blog._id %>/?_method=DELETE" method="POST">
 		  <input type="submit" class="btn btn-danger" value="DELETE">
-		  <% } %>
 	  </form>
+		  <% } %>
 	  </div>
   </div>
 </div>

@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const User = require("./user");
 
 
 
@@ -11,6 +12,10 @@ const BlogSchema = new Schema ({
 	published: Boolean,
 	category: String,       // NEED TO ADD SEARCH BY CATEGORY AND SHOW ONLY IF PUBLISHED TRUE
 	promotion: false,
+	author: {
+		type: Schema.Types.ObjectId,
+		ref: User
+	},
 	views: {
 		unic:{type: Number, default: 0},
 		all: {type: Number, default: 0}

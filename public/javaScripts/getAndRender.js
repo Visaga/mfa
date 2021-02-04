@@ -129,21 +129,8 @@ const category = document.querySelector("#category").textContent;
 	const advert = document.createElement("div");
 	
 	advert.innerHTML = `
-     <img src="https://sun9-31.userapi.com/impf/c836122/v836122425/289e/4gzd6iCxgK8.jpg?size=429x1080&quality=96&proxy=1&sign=ed133ccebc8ac00865808190968a4daa&type=album" width="100%">
+<img src="https://sun9-31.userapi.com/impf/c836122/v836122425/289e/4gzd6iCxgK8.jpg?size=429x1080&quality=96&proxy=1&sign=ed133ccebc8ac00865808190968a4daa&type=album" width="100%"> 
 
-     <div class="advert">
-         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- sticyAd -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-9771995363948446"
-     data-ad-slot="8260358110"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-     </div>
 `
 	advert.style.cssText =`
     min-height: 600px;
@@ -155,7 +142,7 @@ const category = document.querySelector("#category").textContent;
 	
 	rightBarStickyBlock.append(advert);
 	rightBarStickyBlock.style.position = "sticky";
-	rightBarStickyBlock.style.top = "100px";
+	rightBarStickyBlock.style.top = "20px";
 	}
 	
 
