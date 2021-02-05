@@ -7,10 +7,18 @@ const ExpressError = require("../utils/ExpressError");
 const catchAsync = require("../utils/catchAsync");
 const  {isLogedin, isAuthor}  = require("../middleware");
 
-const multer = require("multer");
-const upload = multer({dest: "uploades/"} );
 
-const blogs = require("../controllers/blogs")
+const { storage } = require("../cloudinary");
+const blogs = require("../controllers/blogs");
+const multer = require("multer");
+const upload = multer({storage} );
+
+
+
+
+
+
+
 
 
 
@@ -39,17 +47,17 @@ router.get("/articles/unpublished",isLogedin, catchAsync(blogs.unpublished));
 router.get("/articles/new", isLogedin, blogs.renderNewForm);
 
 
-router.post("/articles",isLogedin, catchAsync(blogs.submitNewBlog));
+router.post("/articles", isLogedin, upload.array("image"), catchAsync(blogs.submitNewBlog));
 
 
 
 
 //==============EDIT=======================================
-router.get("/articles/:id/edit", isLogedin, isAuthor, catchAsync(blogs.renderEditForm));
+router.get("/articles/:id/edit", isAuthor, catchAsync(blogs.renderEditForm));
 
 
 
-router.put("/articles/:id",isLogedin, isAuthor, catchAsync( blogs.submitEditForm));
+router.put("/articles/:id",  upload.array("image"),catchAsync( blogs.submitEditForm));
 
 
 

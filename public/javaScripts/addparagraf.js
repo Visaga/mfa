@@ -36,7 +36,7 @@ const submitBtn = document.querySelector("[type='submit']").remove();
 	<div class="input-group mb-5">
 		<span class="input-group-text">Image Alt / Img Path </span>
 		<input type="text" placeholder="Alt / Descriptions" class="form-control" name="blog[content][${ i }][alt]">
-		 <input type="text" placeholder="image Url" class="form-control" name="blog[content][${ i }][img]">
+		 <input type="text" placeholder="image name" class="form-control" name="blog[content][${ i }][name]">
 	</div>
 
   <input class="btn btn-success" type="submit" value="SAVE CHANGES">

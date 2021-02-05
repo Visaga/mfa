@@ -34,8 +34,8 @@ module.exports.index = async(req, res, next) => {
 			  published: false,
 			  modified: false,
 			  type: "website",
-			  description: "Hello descriptions for the main page", 
-			  keywords: "Keywords for index page",
+			  description: "Буду Знать это веб-ресурс на котором публикуются статьи разной тематики. Все публикации информативны, красиво оформлены, дополнены иллюстрациями и легко читаются. На сайтеесть такие категории как «Путешествия», «Семья и отношения» и многие другие.", 
+			  keywords: "Буду Знать, Путешествия, Семья и отношения,  статьи разной тематики",
 			  robots: "index, follow",
 			  image: allBlogs[0].content[0].img	
 		}
@@ -74,15 +74,17 @@ module.exports.renderNewForm = (req, res, next) => {
 }
 
 
+
+
 module.exports.submitNewBlog = async(req, res) => {
-	
-	
-	req.body.blog.createdDate = new Date();
+
 
 	const newBlog =  new Blog(req.body.blog);
+
+	newBlog.images = req.files.map( file => ({url: file.path, filename: file.filename, originalName: file.originalname}) );
 	
 	newBlog.author = req.user._id;
-	
+	newBlog.createdDate = new Date();
 	newBlog.author = req.user._id;
 	newBlog.views.all = 0;
 	newBlog.views.unic = 0;
@@ -112,9 +114,16 @@ module.exports.renderEditForm = async(req, res) => {
 
 module.exports.submitEditForm = async( req, res, next)  => {
 	
+	
 	   req.body.blog.modifiedDate = new Date();
-	   await Blog.findByIdAndUpdate( req.params.id, req.body.blog );
+	   const blog = await Blog.findByIdAndUpdate( req.params.id, req.body.blog );
 		
+	const newImages = req.files.map( file => ({url: file.path, filename: file.filename, originalName: file.originalname}) );
+	blog.images.push(...newImages);
+	
+	
+	await blog.save();
+	
 	const  updated = await Blog.findById(req.params.id);	
 	
      	req.flash("success", "BLOG HAS BEEB UPDATED")
@@ -122,6 +131,10 @@ module.exports.submitEditForm = async( req, res, next)  => {
 		
 }
 	
+
+
+
+
 	
 module.exports.show = async(req, res, next) => {
 	

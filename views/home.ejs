@@ -52,7 +52,13 @@
 		<%if (allBlogs.length < 1){%>
 		
 		<div class=" container-fluid alert alert-danger alert-dismissible fade show" role="alert">
-		     Пo запросу <strong>"<%= query %>"</strong> ничего не найдено..
+			
+			<%if (currentUrl != "/articles/unpublished") {%>
+			   Пo запросу <strong>"<%= query %>"</strong> ничего не найдено..
+			<% } else {%>
+			Все статьи опубликованы. Здесь ничего нет..
+			<%}%>
+		     
 		<button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
 </div>
 		<%}%>
@@ -81,7 +87,7 @@
 										<p class="card-text">	
 										 <small class="text-muted"><%= blog.createdDate.toLocaleString() %></small>
 									
-											<button  class="btn btn-primary float-right btn-sm">Read more</button>
+											<button  class="btn btn-primary float-right btn-sm">Продолжение..</button>
 										</p>
 										<div>
 											<span class="text-muted">&#128065; <%=blog.views.all%></span>
@@ -90,7 +96,7 @@
 										 <div class="d-flex justify-content-between">
 										  <form action="/articles/<%= blog._id %>/?_method=DELETE" method="POST">
 											  <% if (currentUser){ %>
-											  <input type="submit" class="btn btn-danger" value="DELETE">
+											  <input type="submit" class="btn btn-danger btn-sm" value="DELETE">
 											  <% } %>
 										  </form>
 										  </div>
@@ -123,12 +129,12 @@
 	  
     
 	  <div class="d-flex justify-content-between">
-		   <a href="/articles/<%= blog.urlExtention.replace(/ /g, "-")%>/<%= blog._id%>" class="btn btn-primary btn-sm float-right">Read more</a>
+		   <a href="/articles/<%= blog.urlExtention.replace(/ /g, "-")%>/<%= blog._id%>" class="btn btn-primary btn-sm float-right">Продолжение..</a>
 		  <span class="text-muted">&#128065; <%=blog.views.all%></span>
 		  
 		  <% if (currentUser){ %>
 	  <form action="/articles/<%= blog._id %>/?_method=DELETE" method="POST">
-		  <input type="submit" class="btn btn-danger" value="DELETE">
+		  <input type="submit" class="btn btn-danger btn-sm" value="DELETE">
 	  </form>
 		  <% } %>
 	  </div>

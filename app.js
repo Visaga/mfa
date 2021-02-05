@@ -1,3 +1,10 @@
+if (process.env.NODE_ENV !== "production") {
+	require("dotenv").config();
+}
+
+const dbPassword = process.env.Mongo_Atlas_Password;
+const mongoLogin = process.env.Mongo_login;
+
 const express = require("express");
 const app = express();
 const ejsMate = require("ejs-mate");  //for Layouts
@@ -59,14 +66,19 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 
-app.get("/viewcount", (req, res) => {
+app.get("/viewcount", async(req, res) => {
+	const allBlogs = await Blog.find({});
 	
-	if (req.session.count){
-		req.session.count +=1;
-	} else {
-		req.session.count = 1;
+	const totalCount = {
+		unic: 0,
+		all: 0
 	}
-	res.send("STolko raz " + req.session.count)
+	
+	allBlogs.forEach(blog =>{
+		totalCount.unic += blog.views.unic;
+		totalCount.all += blog.views.all;
+	});
+	res.send(totalCount.unic + " / " + totalCount.all)
 });
 
 
@@ -87,7 +99,7 @@ app.get("/viewcount", (req, res) => {
 
 //PRODACTION DB
 
-mongoose.connect("mongodb+srv://vobiar:1824Sania@cluster0.vxx8x.mongodb.net/<dbname>?retryWrites=true&w=majority", {
+mongoose.connect("mongodb+srv://"+ mongoLogin +":" + dbPassword+ "@cluster0.vxx8x.mongodb.net/<dbname>?retryWrites=true&w=majority", {
 	useNewUrlParser: true,
 	useCreateIndex: true,
 	useUnifiedTopology: true,

@@ -2,7 +2,7 @@
 
 
 <!-- enctype="multipart/form-data" -->
-<form class="form" action="/articles" method="POST" >
+<form class="form" action="/articles" method="POST" enctype="multipart/form-data" >
 	
 	
   <h3 class="text-center mb-5"> SEO DESCRIPTIONS</h3>
@@ -84,7 +84,13 @@
   <textarea class="form-control" name="blog[content][text]"></textarea>
 </div>
 	
-	<!-- <input type="file" name="image" id="image"> -->
+		
+		
+	 <div class="mb-3">
+  <label for="image" class="form-label">Upload photos</label>
+  <input class="form-control" type="file" id="image" name="image" multiple>
+</div>  <!--=====================FILE UPLOAD -->
+		
 	<div class="input-group mb-5">
 		<span class="input-group-text">Image Alt / Img Path </span>
 		<input type="text" placeholder="Alt / Descriptions" class="form-control" name="blog[content][alt]">
