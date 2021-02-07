@@ -27,6 +27,7 @@ const mongoose = require("mongoose");
 const Blog     = require("./models/blog.js");
 const User = require("./models/user");
 
+const compression = require("compression");
 
 
 
@@ -39,8 +40,19 @@ app.use(express.urlencoded({extended: true}));
 
 app.use(methodOverride("_method"));
 
-
 app.use(express.static(path.join(__dirname, "public")));  
+
+
+app.use(compression({
+	level: 6,
+	threshold: 0,
+	filter: (req, res) => {
+		if (req.headers["x-no-compression"]){
+			return false;
+		}
+	return compression.filter(req, res);	
+	}
+}));
 
 
 const sessionConfig = {

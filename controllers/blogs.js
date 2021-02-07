@@ -3,6 +3,8 @@ const Blog = require("../models/blog");
 const  { isAuthor}  = require("../middleware");
 const ExpressError = require("../utils/ExpressError");
 
+
+
 module.exports.index = async(req, res, next) => {
 
 	if (req.query.search){
@@ -30,7 +32,7 @@ module.exports.index = async(req, res, next) => {
 		title: "Буду Знать - Интересные и познавательные публикации.",
 		seoTags: {
 			  canonical: true,
-			  url: "http://buduznat.ru/articles",
+			  url: "http://www.buduznat.ru/articles",
 			  published: false,
 			  modified: false,
 			  type: "website",
@@ -163,7 +165,7 @@ module.exports.show = async(req, res, next) => {
 			  allBlogs: recent, 
 			  seoTags: {
 					  canonical: true,
-					  url: `http://buduznat.ru/articles/${req.params.urlextention}/${req.params.id}`,
+					  url: `http://www.buduznat.ru/articles/${req.params.urlextention}/${req.params.id}`,
 					  published: foundPage.createdDate,
 					  modified: foundPage.modifiedDate,
 					  type: "article",
