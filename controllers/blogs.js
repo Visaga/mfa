@@ -2,6 +2,7 @@
 const Blog = require("../models/blog");
 const  { isAuthor}  = require("../middleware");
 const ExpressError = require("../utils/ExpressError");
+const {cloudinary} = require("../cloudinary/index.js")
 
 
 
@@ -114,20 +115,29 @@ module.exports.renderEditForm = async(req, res) => {
 }
 
 
+
+
+
 module.exports.submitEditForm = async( req, res, next)  => {
 	
 	
 	   req.body.blog.modifiedDate = new Date();
 	   const blog = await Blog.findByIdAndUpdate( req.params.id, req.body.blog );
 		
-	const newImages = req.files.map( file => ({url: file.path, filename: file.filename, originalName: file.originalname}) );
-	blog.images.push(...newImages);
-	
-	
-	await blog.save();
-	
-	const  updated = await Blog.findById(req.params.id);	
-	
+		const newImages = req.files.map( file => ({url: file.path, filename: file.filename, originalName: file.originalname}) );
+		blog.images.push(...newImages);
+		await blog.save();
+      
+	if (req.body.deleteImages){
+		for (let filename of req.body.deleteImages) {
+            await cloudinary.uploader.destroy(filename);
+        }
+		
+		await blog.updateOne({$pull: {images:{filename: {$in: req.body.deleteImages }}}});
+	}
+
+		const  updated = await Blog.findById(req.params.id);	
+
      	req.flash("success", "BLOG HAS BEEB UPDATED")
 	res.redirect("/articles/" + updated.urlExtention.replace(/ /g, "-") + "/" + req.params.id);
 		
@@ -181,13 +191,15 @@ module.exports.show = async(req, res, next) => {
 		if ( foundPage.published == true){
 			
 			/////////////////////////////////counting views
-			if (req.session[req.params.id]){
-		         foundPage.views.all += 1;
-	           } else {
-		        req.session[req.params.id] = 1;
-				foundPage.views.unic += 1
-				foundPage.views.all += 1;
-	        }
+			if (!req.user){
+				if (req.session[req.params.id]){
+					 foundPage.views.all += 1;
+				   } else {
+					req.session[req.params.id] = 1;
+					foundPage.views.unic += 1
+					foundPage.views.all += 1;   
+				}
+			}	
 			
 			Blog.findByIdAndUpdate( req.params.id, foundPage).catch(err => console.log("fail to count"));
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////

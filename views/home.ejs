@@ -27,7 +27,7 @@
 	</div>
 	
 	<section class="col-sm-12 jumbotron p-0 position-relative">
-	<div class="d-flex justify-content-center flex-column" style="width: 100%; height: 350px; background: teal; margin-bottom: 50px; overflow: hidden; background: url(https://vuzopedia.ru/storage/app/uploads/public/5e3/ad8/3c2/5e3ad83c2d910735464979.jpg) 100% 100% no-repeat;background-size: cover;">
+	<div class="d-flex justify-content-center flex-column" style="width: 100%; height: 350px; background: teal; margin-bottom: 50px; overflow: hidden; background: url(https://res.cloudinary.com/dnl9unhgy/image/upload/v1612752580/BuduZnat/home12001_kxynl7.jpg) 100% 100% no-repeat;background-size: cover;">
 		<h1 style="font-family: 'Caveat', cursive;" class="text-start text-light mb-3">Теперь ты будешь это знать..</h1>
 		
 		<form action="/articles/" method="GET" id="searchForm"  class="container d-none  d-md-flex d-xl-none position-absolute" style="width: 320px; bottom: 65px; right: 10px;">
@@ -68,7 +68,7 @@
 				<div class="card mb-3 shadow">
 						<div class="row">
 								<div class="col-md-6 col-lg-4 d-block">
-									<img src="<%= blog.content[0].img %>" class="img-fluid " alt="<%= blog.content[0].alt %>">
+									<img src="<%= blog.content[0].img.replace("/upload", "/upload/w_600") %>" class="img-fluid " alt="<%= blog.content[0].alt %>">
 								</div>
 
 								<div class="col-md-6 col-lg-8 d-block">

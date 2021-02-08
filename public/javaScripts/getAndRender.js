@@ -97,7 +97,7 @@ const category = document.querySelector("#category").textContent;
 				<a ${ rel } href="/articles/${blog.urlExtention.replace(/ /g, "-") }/${ blog._id }" class="text-decoration-none text-dark">
 					 <div>
 							<div class="card mb-3 shadow-sm" >
-							 <img src="${ blog.content[0].img }" class="card-img-top" alt="${ blog.title }">
+							 <img src="${ blog.content[0].img.replace("/upload", "/upload/w_600") }" class="card-img-top" alt="${ blog.title }">
 							<div class="card-body">
 							<h5 class="card-title"> ${ blog.title.slice(0,35) }..</h5> 
 							  <time class="text-muted " datetime>${ blog.createdDate.toLocaleString().slice(0,10) }.</time>

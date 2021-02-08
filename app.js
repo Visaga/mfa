@@ -29,6 +29,9 @@ const User = require("./models/user");
 
 const compression = require("compression");
 
+const mongoSanitize = require("express-mongo-sanitize");
+
+
 
 
 
@@ -41,7 +44,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
 
 app.use(express.static(path.join(__dirname, "public")));  
-
+app.use(mongoSanitize());
 
 app.use(compression({
 	level: 6,
@@ -80,7 +83,6 @@ passport.deserializeUser(User.deserializeUser());
 
 app.get("/viewcount", async(req, res) => {
 	const allBlogs = await Blog.find({});
-	
 	const totalCount = {
 		unic: 0,
 		all: 0

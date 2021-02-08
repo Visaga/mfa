@@ -47,17 +47,17 @@ router.get("/articles/unpublished",isLogedin, catchAsync(blogs.unpublished));
 router.get("/articles/new", isLogedin, blogs.renderNewForm);
 
 
-router.post("/articles", isLogedin, upload.array("image"), catchAsync(blogs.submitNewBlog));
+router.post("/articles", isLogedin, upload.array("image", {use_filename: true}), catchAsync(blogs.submitNewBlog));
 
 
 
 
 //==============EDIT=======================================
-router.get("/articles/:id/edit", isAuthor, catchAsync(blogs.renderEditForm));
+router.get("/articles/:id/edit",isLogedin, isAuthor, catchAsync(blogs.renderEditForm));
 
 
 
-router.put("/articles/:id",  upload.array("image"),catchAsync( blogs.submitEditForm));
+router.put("/articles/:id", isLogedin, upload.array("image" ),catchAsync( blogs.submitEditForm));
 
 
 
