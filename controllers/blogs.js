@@ -4,12 +4,14 @@ const  { isAuthor}  = require("../middleware");
 const ExpressError = require("../utils/ExpressError");
 const {cloudinary} = require("../cloudinary/index.js")
 
-
+const sanitizeHtml = require("sanitize-html");
 
 module.exports.index = async(req, res, next) => {
 
 	if (req.query.search){
-		
+		console.log(req.query.search)
+		req.query.search = sanitizeHtml(req.query.search);
+		console.log(req.query.search + "Fu nah proneslo")
 		const regex = new RegExp(escapeRegex(req.query.search), "gi");
 		
 		const allBlogs = await Blog.find( {title: regex, published: true});
@@ -221,6 +223,7 @@ module.exports.show = async(req, res, next) => {
 module.exports.lazyLoadRequest = async(req, res, next) => {
 
 	const parametrs = req.params.category == "All"? {published: true}: {category: req.params.category, published: true};
+	
 	
 	const someBlogs = await Blog.find(parametrs);
 	

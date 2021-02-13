@@ -14,7 +14,7 @@ const category = document.querySelector("#category").textContent;
 	//Render some blocks to Right Bar
 	
 	getBlogs(0,5,category)
-	.then(data => renderBlogs(rightBarBlocks, data, "nofollow"))
+	.then(data => renderBlogs(rightBarBlocks, data, "rel='nofollow'"))
 	.catch(err => console.log("Problem to load right bar content.. : " + err))
 	.finally(() => { renderStickyBlock() });
 	
@@ -40,7 +40,7 @@ const category = document.querySelector("#category").textContent;
 			.then(data => {
 				if (data.length > 0){
 					data = data.reverse();
-					renderBlogs(lazyLoadingBlock, data, " ",blogSize);
+					renderBlogs(lazyLoadingBlock, data, "rel='nofollow'",blogSize);
 				} 
 				return data;
 			})
@@ -120,7 +120,7 @@ const category = document.querySelector("#category").textContent;
 		return fetch(`/articles/get/${ startFrom }/${ category }/${ quantity }`)
 		.then(respond => respond.json())
 		.then(res => res)
-		.catch(err => console.log("Failed to fetch"))	
+		.catch(err => console.log("Failed to fetch" + err))	
 	}
 	
 	

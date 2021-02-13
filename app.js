@@ -2,6 +2,7 @@ if (process.env.NODE_ENV !== "production") {
 	require("dotenv").config();
 }
 
+
 const dbPassword = process.env.Mongo_Atlas_Password;
 const mongoLogin = process.env.Mongo_login;
 
@@ -15,6 +16,7 @@ const ExpressError = require("./utils/ExpressError");
 const catchAsync = require("./utils/catchAsync");
 const flash = require("connect-flash");
 const session = require("express-session");
+
 
 const passport = require("passport");
 const localStrategy = require("passport-local");
@@ -30,8 +32,7 @@ const User = require("./models/user");
 const compression = require("compression");
 
 const mongoSanitize = require("express-mongo-sanitize");
-
-
+const helmet = require("helmet");
 
 
 
@@ -45,6 +46,8 @@ app.use(methodOverride("_method"));
 
 app.use(express.static(path.join(__dirname, "public")));  
 app.use(mongoSanitize());
+app.use(helmet({contentSecurityPolicy: false}));
+
 
 app.use(compression({
 	level: 6,
@@ -59,11 +62,13 @@ app.use(compression({
 
 
 const sessionConfig = {
+	name: "hlopchik",
 	secret: "This should be better secret! change it",
 	resave: false,
 	saveUninitialized: true,
 	cookie: {
 		httpOnly: true, //For Security reasons
+		// secure: true, //for https
 		expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
 		maxAge: 1000 * 60 * 60 * 24 * 7
 	}
@@ -174,6 +179,11 @@ app.use((err, req, res, next) => {
 
 
 
-// app.listen("5000", () => console.log("SERVER STARTED!!!"));
 
-app.listen(process.env.PORT, '0.0.0.0')
+
+if (process.env.NODE_ENV !== "production") {
+	app.listen("5000", () => console.log("SERVER STARTED!!!"));
+} else {
+	app.listen(process.env.PORT, '0.0.0.0')
+}
+
