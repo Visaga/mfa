@@ -16,7 +16,7 @@
 	////// -->
 	
 	
-	<div class="col-xl-8 col-lg-12 shadow-sm "  id="main-content">
+	<div class="col-xl-8 col-lg-12"  id="main-content">
 		 <% if (foundPage.published == false) { %>
 		     <div class="alert alert-danger" role="alert">
   NOT PUBLISHED YET!
@@ -55,20 +55,27 @@
 		
 		<% }) %>
 		
+		<div class="container-fluid  d-flex flex-column">
+					<div class="container-fluid bg-light  p-1">
+						<span class="p-2">Похожие статьи</span>
+					</div>
+					<ul id="similar-articles">
+						
+					</ul>
+				</div>
+			
+				</div>
+		
+		
+		
+		
 		<div class="d-flex justify-content-between flex-wrap p-3 bg-light">
 			<author class="text-muted"> © <%= foundPage.author.username%></author>
 			<category class="text-muted" > category / <span id="category"><%= foundPage.category %></span></category>
 			
 			<div clas="container-fluid d-flex ">
 			<span class=" d-block text-muted mr-3"> &#128065; <%= foundPage.views.all%> / <%= foundPage.views.unic%></span>
-				<div>
-					<!-- <!-- uSocial -->
-<!-- <script async src="https://usocial.pro/usocial/usocial.js?uid=0a413d65bef58479&v=6.1.5" data-script="usocial" charset="utf-8"></script>
-<div class="uSocial-Like" data-lang="en" data-pid="779af406ca7643534527b0a9990c71f1" data-type="like" data-options="absolute,round-rect,horizontal" data-social="fb" data-appId-fb="459120748804212"></div> -->
-<!-- /uSocial --> -->
-				</div>
-			
-				</div>
+				
 		</div>
 		
 		<% if (currentUser){ %>
@@ -95,22 +102,24 @@
 	
 	<div class="col-xl-1" ></div>
 	
-	<!-- /////////////// right Bar-->
+	
+	
+	<!-- =======================  RIGHT BAR ASIDE ============================ -->
 	<div class="col-xl-3 d-none d-xl-flex flex-column position-relative " id="rightBar">
 	<div id="rightBarBlocks" class=""></div>
 
 	<div id="rightBar-stickyBlock" class="mt-5"></div>
 	</div>
-		
+	<!-- ------------------------------------------------------------------------->
 	
 	
 	
-
-	<div class="shadow-lg bg-light mb-5" style="width: 300px; height: 1px ; margin: 0 auto;" ></div>
+	
+	<!-- ============LOADING ON SCROLL PARRENT======================================= -->
 	<div>
-		<div class=" row col-xs-12 d-flex flex-wrap" id="lazyLoadingBlock"></div>
+		<div class="row row-cols-1 row-cols-md-2 g-4 mt-5" id="lazyLoadingBlock"></div>
 	</div>
-	
+	<!-- ---------------------------------------------------------------------------- -->
 	
 	
 </div>

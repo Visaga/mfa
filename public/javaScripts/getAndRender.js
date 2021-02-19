@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
 	
-	
 const mainContent = document.querySelector("#main-content");	
 const rightBarBlocks = document.querySelector("#rightBarBlocks");
 const rightBarStickyBlock = document.querySelector("#rightBar-stickyBlock");	
@@ -69,42 +68,22 @@ const category = document.querySelector("#category").textContent;
 			       
 			blogSize.forEach(size => blogPreview.classList.add(size));
 			
-// 			if (ind % 2 == 0){
-// 				const advert = document.createElement("div");
-// 				advert.style.cssText = `
-//                max-width: 100%;
-//                min-width: 80%;
-//                max-height: 700px;
-//                min-height: 300px;
-// `
-// 				advert.innerHTML = `
-// 						<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-// 						<!-- rightBar -->
-// 						<ins class="adsbygoogle"
-// 							 style="display:block"
-// 							 data-ad-client="ca-pub-9771995363948446"
-// 							 data-ad-slot="2816459747"
-// 							 data-ad-format="auto"
-// 							 data-full-width-responsive="true"></ins>
-// 						<script>
-// 							 (adsbygoogle = window.adsbygoogle || []).push({});
-// 						</script>
-// `
-// 				parrent.append(advert);
-// 			} 
 			const relAt = `rel="${ rel }"`
+			const ifUpdatedDate = blog.modifiedDate.length > 1 ? blog.modifiedDate.slice(0,10): blog.createdDate.slice(0,10);
+						
 			blogPreview.innerHTML = `
-				<a ${ rel } href="/articles/${blog.urlExtention.replace(/ /g, "-") }/${ blog._id }" class="text-decoration-none text-dark">
-					 <div>
-							<div class="card mb-3 shadow-sm" >
-							 <img src="${ blog.content[0].img.replace("/upload", "/upload/w_600") }" class="card-img-top" alt="${ blog.title }">
-							<div class="card-body">
-							<h5 class="card-title"> ${ blog.title.slice(0,35) }..</h5> 
-							  <time class="text-muted " datetime>${ blog.createdDate.toLocaleString().slice(0,10) }.</time>
-						 </div>
+				<a ${ rel } href="/articles/${blog.urlExtention.replace(/ /g, "-") }/${ blog._id }" class="text-decoration-none col text-dark">		 
+					<div class="card mb-3 h-100  border-0 " >
+						      <img src="${ blog.content[0].img.replace("/upload", "/upload/w_600") }" class="card-img-top rounded-0" alt="${ blog.title }">
+						        <div class="card-body p-0 pt-2">
+                                <div class="post-meta">
+									<span class="post-category text-light">  ${ blog.category } </span>
+									<span class="post-date text-muted"> ${ifUpdatedDate} </span>	
+							    </div>
 
+							  <h5 class="card-title"> ${ blog.title }</h5> 
 						</div>
-					</div>
+					</div>	
 				</a>`
 			
 			parrent.append(blogPreview);
@@ -124,18 +103,19 @@ const category = document.querySelector("#category").textContent;
 	}
 	
 	
+	
+	
 	// ========= RENDER STYCKY ADVERT BLOCK======================
 	function renderStickyBlock(){
 	const advert = document.createElement("div");
 	
 	advert.innerHTML = `
-<img src="https://sun9-31.userapi.com/impf/c836122/v836122425/289e/4gzd6iCxgK8.jpg?size=429x1080&quality=96&proxy=1&sign=ed133ccebc8ac00865808190968a4daa&type=album" width="100%"> 
+ 
 
 `
 	advert.style.cssText =`
-    min-height: 600px;
-    width: 330px;
-    max-width: 100%;
+    height: 600px;
+    width: 300px;;
      background: #ffc10750;
     margin-bottom: 50px;
 `;
@@ -146,4 +126,32 @@ const category = document.querySelector("#category").textContent;
 	}
 	
 
+	
+	
+	
+	
+	// Render up to 5 similar content links
+	
+	const linkList = document.querySelector("#similar-articles");
+	
+	
+	getBlogs(startFrom = 0, quantity = 20, "All")
+	.then(data => renderSimilarContentLinks(data))
+	
+	
+	
+	async function renderSimilarContentLinks (data){
+		const sameCategoryBlogs = await data.filter( blog => blog.category == category);
+			
+	    for(let i = 0; i < 5; i++){
+			
+			const link = document.createElement("li");
+			link.innerHTML = ` <a href="${sameCategoryBlogs[i].urlExtention}" >${ sameCategoryBlogs[i].title} </a>`
+			
+			linkList.append(link)
+		}
+	}
+	
+	
+	
 });
