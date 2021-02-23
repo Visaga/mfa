@@ -42,22 +42,30 @@
 	
 	<!-- ==========RESENT POSTS SECTION ======================== -->
 	
-	<section class="container-fluid  mb-5">
+	<section class="container-fluid resent-posts-section mb-5">
 		<div class="section-title-box d-flex">
 			<span class="popular">Недавно опубликованные</span>
 		</div>
 		<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+		<%if (currentUrl != "/articles/unpublished") {%>	
+			<% for(let i = 0; i < 3; i++){ %>	
 			
-			<% for(let i = 0; i < 3; i++){ %>			
-			
+			<a href="/articles/<%= allBlogs[i].urlExtention.replace(/ /g, "-")%>/<%= allBlogs[i]._id%>" class="text-decoration-none text-dark">
 			 <div class="col">
 				<div class="card mt-3 border-0 h-100 futured-card">
-				  <img src="<%=allBlogs[i].content[0].img%>" class="card-img-top rounded-0" alt="<%=allBlogs[5].title%>">
-				  <div class="card-body card-body-up">
+					<img src="<%= allBlogs[i].prevImg.replace("/upload", "/upload/w_600") %>" class="img-fluid " alt="<%=allBlogs[i].title %>">
+                      <div class="card-body card-body-up">
 					  <div class="card-title-wrapper text-center">
 						  <h5 class="card-title fixed-title"><%=allBlogs[i].title%></h5>
 					  </div>
-					<p class="card-text text-center">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+					  
+					  <% if (allBlogs[i].content[0].text.length > 1) {%>
+					<p class="card-text text-center"><%- allBlogs[i].content[0].text.slice(0,90) + "..." %></p>
+					  <% } else { %>
+						  <p class="card-text text-center"><%- allBlogs[i].content[1].text.slice(0,90) + "..." %></p>
+					 <% } %>
+					  
+					  
 				  </div>
 					
 					<div class="card-footer mt-2">
@@ -73,7 +81,8 @@
 				</div>
 			  </div>	
 	 		<% } %>	
-			
+		<% } %>	
+			</a>
 		</div>
 	</section>
 	
@@ -81,13 +90,14 @@
 	<!-- =============MAIN CONTENT SECTION============= -->
 	<div class="mainContent  col-xl-9">
          <div class="advert-wrapper">
-			 <div class="sm-hr-advert-container bg-secondary">
+			 <div class="sm-hr-advert-container bg-secondary;">
 				 Advert 728 / 90
 			 </div>
 		</div>
 	<div class=" d-flex justify-content-between flex-wrap">	
-		<div class="section-title-box d-flex">
-			<span class="popular">Популярные статьи</span>
+		
+		<div class="section-title-box-underlined d-flex">
+			<span class="popular-no-box">Популярные статьи</span>
 		</div>
 		
 			
@@ -108,47 +118,48 @@
 		
 		
 		
-			<% allBlogs.forEach(blog =>{ %>
+			<% for (let i = 3; i < allBlogs.length; i++){ %>
 		
 		<!-- ======card/////////////////// -->
-<a href="/articles/<%= blog.urlExtention.replace(/ /g, "-")%>/<%= blog._id%>" class="text-decoration-none text-dark">
+<a href="/articles/<%= allBlogs[i].urlExtention.replace(/ /g, "-")%>/<%= allBlogs[i]._id%>" class="text-decoration-none text-dark">
 				<div class="card mb-3 border-0">
 						<div class="row">
 								<div class="col-md-6 col-lg-4 d-block">
-									<img src="<%= blog.content[0].img.replace("/upload", "/upload/w_600") %>" class="img-fluid " alt="<%= blog.content[0].alt %>">
+									
+								<img src="<%= allBlogs[i].prevImg.replace("/upload", "/upload/w_600") %>" class="img-fluid " alt="<%= allBlogs[i].title %>">	
 								</div>
 
 								<div class="col-md-6 col-lg-8 d-block">
 									<div class="card-body p-0  pt-2">
 										<div class="post-meta">
-											<span class="post-category text-light" ><%=blog.category%></span>
-											<% if (blog.modifiedDate.length > 1){%>
-												<span class="post-date text-muted"><%=blog.modifiedDate%></span>
+											<span class="post-category text-light" ><%= allBlogs[i].category%></span>
+											<% if (allBlogs[i].modifiedDate.length > 1){%>
+												<span class="post-date text-muted"><%=allBlogs[i].modifiedDate%></span>
 											<%} else {%>
-												<span class="post-date text-muted"><%= blog.createdDate.toDateString() %></span>
+												<span class="post-date text-muted"><%= allBlogs[i].createdDate.toDateString() %></span>
 											<% } %>
 											
 										</div>
 										
-										<h5 class="card-title"><%- blog.title %></h5>
+										<h5 class="card-title"><%- allBlogs[i].title %></h5>
 										
-										<% if(blog.content[0].text.length > 0){ %>
-										<p class="card-text  d-none d-sm-block"><%- blog.content[0].text.slice(0,90) + "..." %></p>
-										<%} else if(blog.content[1] && blog.content[1].text.length > 0) {%>
-									    <p class="card-text d-none d-sm-block"><%- blog.content[1].text.slice(0,90) + "..." %></p>
+										<% if(allBlogs[i].content[0].text.length > 0){ %>
+										<p class="card-text  d-none d-sm-block"><%-allBlogs[i].content[0].text.slice(0,90) + "..." %></p>
+										<%} else if(allBlogs[i].content[1] && allBlogs[i].content[1].text.length > 0) {%>
+									    <p class="card-text d-none d-sm-block"><%- allBlogs[i].content[1].text.slice(0,90) + "..." %></p>
 										<%} else{%>
 										<p>
 											 "no text"
 										</p>
 										<%}%>
 										<p class="card-text mt-auto card-content-footer">	
-										   <span class="text-muted">&#128065; <%=blog.views.all%></span>
+										   <span class="text-muted">&#128065; <%=allBlogs[i].views.all%></span>
 											<span class="float-right read-more">Читать далее..</span>
 										</p>
 										
 
 										 <div class="d-flex justify-content-between">
-										  <form action="/articles/<%= blog._id %>/?_method=DELETE" method="POST">
+										  <form action="/articles/<%= allBlogs[i]._id %>/?_method=DELETE" method="POST">
 											  <% if (currentUser){ %>
 											  <input type="submit" class="btn btn-danger btn-sm " value="DELETE">
 											  <% } %>
@@ -162,7 +173,7 @@
 				</div>
 		</a>
 	
-<% }) %>
+<% } %>
 		
 		
 	</div>	

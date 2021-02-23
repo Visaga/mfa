@@ -74,7 +74,7 @@ const category = document.querySelector("#category").textContent;
 			blogPreview.innerHTML = `
 				<a ${ rel } href="/articles/${blog.urlExtention.replace(/ /g, "-") }/${ blog._id }" class="text-decoration-none col text-dark">		 
 					<div class="card mb-3 h-100  border-0 " >
-						      <img src="${ blog.content[0].img.replace("/upload", "/upload/w_600") }" class="card-img-top rounded-0" alt="${ blog.title }">
+						      <img src="${ blog.prevImg.replace("/upload", "/upload/w_600") }" class="card-img-top rounded-0" alt="${ blog.title }">
 						        <div class="card-body p-0 pt-2">
                                 <div class="post-meta">
 									<span class="post-category text-light">  ${ blog.category } </span>

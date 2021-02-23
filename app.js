@@ -179,6 +179,12 @@ app.use((err, req, res, next) => {
 
 
 
+let http = require("http");
+setInterval(function(){
+	http.get("http://www.buduznat.ru/viewcount");
+},300000)
+
+
 
 
 if (process.env.NODE_ENV !== "production") {

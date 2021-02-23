@@ -14,13 +14,11 @@ ImageSchema.virtual("thumbnail").get(function(){
 	return this.url.replace("/upload", "/upload/w_200");
 });
 
-ImageSchema.virtual("desctop").get(function(){
-	return this.url.replace("/upload", "/upload/w_200");
-});
 
-ImageSchema.virtual("mobile").get(function(){
-	return this.url.replace("/upload", "/upload/w_200");
-});
+
+
+
+
 
 
 const BlogSchema = new Schema ({
@@ -31,6 +29,7 @@ const BlogSchema = new Schema ({
 	published: Boolean,
 	category: String,       // NEED TO ADD SEARCH BY CATEGORY AND SHOW ONLY IF PUBLISHED TRUE
 	promotion: false,
+	prevImg: String,
 	author: {
 		type: Schema.Types.ObjectId,
 		ref: User
