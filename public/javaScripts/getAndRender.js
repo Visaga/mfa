@@ -63,7 +63,8 @@ const category = document.querySelector("#category").textContent;
 		
 		data.forEach((blog, ind) => {
 			if (blog.title != currentBlogTitle){
-	
+	         console.log( blog.title)
+				 console.log( currentBlogTitle )
 			const blogPreview = document.createElement("div");
 			       
 			blogSize.forEach(size => blogPreview.classList.add(size));
