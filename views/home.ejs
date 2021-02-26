@@ -26,6 +26,66 @@
 		
 	</div>
 	
+	
+	
+	<section class=" row p-0 m-auto d-flex justify-content-between">
+		
+		<div class=" col-md-6 mt-3 ">
+			<a rel="internal" href="/articles/<%= allBlogs[0].urlExtention.replace(/ /g, "-")%>/<%= allBlogs[0]._id%>" class="text-decoration-none text-dark">
+			<div class=" card border-0 ">
+			<div class="img-wrapper d-block p-0 ">
+					<img src="<%= allBlogs[0].prevImg %>" alt="<%= allBlogs[0].title %>" class="img-fluid">
+			</div>
+			
+			
+			<div class="card-body cardOverlay text-light bottom-0 position-absolute">
+				<h5 class="card-title pt-3 overlayTitle text-center">
+					<%=allBlogs[0].title%>
+				</h5>
+				<div class="d-none d-lg-block">
+					<% if (allBlogs[0].content[0].text.length > 1) {%>
+					<p class="card-text text-center"><%- allBlogs[0].content[0].text.slice(0,200) + "..." %></p>
+					  <% } else { %>
+						  <p class="card-text text-center"><%- allBlogs[0].content[1].text.slice(0,200) + "..." %></p>
+					 <% } %>
+				</div>
+			    </div>
+		</div>
+			</a>
+		</div>
+		
+		
+		
+		<div class=" col-md-6 mt-3">
+			<a rel="internal" href="/articles/<%= allBlogs[0].urlExtention.replace(/ /g, "-")%>/<%= allBlogs[0]._id%>" class="text-decoration-none text-dark">
+			<div class="card border-0 ">
+			<div class="img-wrapper d-block p-0 ">
+					<img src="<%= allBlogs[1].prevImg %>" alt="<%= allBlogs[1].title %>" class="img-fluid">
+			</div>
+			
+			
+			<div class="card-body cardOverlay text-light bottom-0 position-absolute ">
+				<h5 class="card-title overlayTitle pt-3 text-center">
+					<%=allBlogs[1].title%>
+				</h5>
+				<div class="d-none d-lg-block">
+					<% if (allBlogs[1].content[0].text.length > 1) {%>
+					<p class="card-text text-center"><%- allBlogs[1].content[0].text.slice(0,200) + "..." %></p>
+					  <% } else { %>
+						  <p class="card-text text-center"><%- allBlogs[1].content[1].text.slice(0,200) + "..." %></p>
+					 <% } %>
+				</div>
+			    </div>
+		</div>
+			</a>
+		</div>
+		
+		
+		
+	</section>
+	
+	
+	
 	<!-- <section class="col-sm-12 jumbotron p-0 position-relative">
 	<div class="d-flex justify-content-center flex-column" style="width: 100%; height: 350px; background: teal; margin-bottom: 50px; overflow: hidden; background: url(https://res.cloudinary.com/dnl9unhgy/image/upload/v1612752580/BuduZnat/home12001_kxynl7.jpg) 100% 100% no-repeat;background-size: cover;">
 		<h1 style="font-family: 'Caveat', cursive;" class="text-start text-light mb-3">Теперь ты будешь это знать..</h1> -->
@@ -48,7 +108,7 @@
 		</div>
 		<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
 		<%if (currentUrl != "/articles/unpublished") {%>	
-			<% for(let i = 0; i < 3; i++){ %>	
+			<% for(let i = 2; i < 5; i++){ %>	
 			
 			<a href="/articles/<%= allBlogs[i].urlExtention.replace(/ /g, "-")%>/<%= allBlogs[i]._id%>" class="text-decoration-none text-dark">
 			 <div class="col">
@@ -118,7 +178,7 @@
 		
 		
 		
-			<% for (let i = 3; i < allBlogs.length; i++){ %>
+			<% for (let i = 5; i < allBlogs.length; i++){ %>
 		
 		<!-- ======card/////////////////// -->
 <a href="/articles/<%= allBlogs[i].urlExtention.replace(/ /g, "-")%>/<%= allBlogs[i]._id%>" class="text-decoration-none text-dark">
