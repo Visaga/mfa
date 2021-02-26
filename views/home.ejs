@@ -44,9 +44,9 @@
 				</h5>
 				<div class="d-none d-lg-block">
 					<% if (allBlogs[0].content[0].text.length > 1) {%>
-					<p class="card-text text-center"><%- allBlogs[0].content[0].text.slice(0,200) + "..." %></p>
+					<p class="card-text text-center"><%- allBlogs[0].content[0].text.slice(0,100) + "..." %></p>
 					  <% } else { %>
-						  <p class="card-text text-center"><%- allBlogs[0].content[1].text.slice(0,200) + "..." %></p>
+						  <p class="card-text text-center"><%- allBlogs[0].content[1].text.slice(0,100) + "..." %></p>
 					 <% } %>
 				</div>
 			    </div>
@@ -64,13 +64,13 @@
 			</div>
 			
 			
-			<div class="card-body cardOverlay text-light bottom-0 position-absolute ">
+			<div class="card-body cardOverlay text-light bottom-0 position-absolute">
 				<h5 class="card-title overlayTitle pt-3 text-center">
 					<%=allBlogs[1].title%>
 				</h5>
 				<div class="d-none d-lg-block">
 					<% if (allBlogs[1].content[0].text.length > 1) {%>
-					<p class="card-text text-center"><%- allBlogs[1].content[0].text.slice(0,200) + "..." %></p>
+					<p class="card-text text-center"><%- allBlogs[1].content[0].text.slice(0,100) + "..." %></p>
 					  <% } else { %>
 						  <p class="card-text text-center"><%- allBlogs[1].content[1].text.slice(0,200) + "..." %></p>
 					 <% } %>

@@ -142,7 +142,7 @@
 
 .cardOverlay{
 	background: rgb(3,5,5);
-    background: linear-gradient(0deg, rgba(3,5,5,1) 4%, rgba(32,31,31,0.29175420168067223) 100%, rgba(40,37,32,0.08727240896358546) 100%); 
+    background: linear-gradient(0deg, rgba(3,5,5,0.8099614845938375) 34%, rgba(31,32,32,0) 100%, rgba(40,37,32,0) 100%);
 }
 
 .overlayTitle{
