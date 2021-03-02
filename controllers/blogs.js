@@ -9,9 +9,7 @@ const sanitizeHtml = require("sanitize-html");
 module.exports.index = async(req, res, next) => {
 
 	if (req.query.search){
-		console.log(req.query.search)
 		req.query.search = sanitizeHtml(req.query.search);
-		console.log(req.query.search + "Fu nah proneslo")
 		const regex = new RegExp(escapeRegex(req.query.search), "gi");
 		
 		const allBlogs = await Blog.find( {title: regex, published: true});
@@ -42,7 +40,7 @@ module.exports.index = async(req, res, next) => {
 			  description: "Буду Знать это веб-ресурс на котором публикуются статьи разной тематики. Все публикации информативны, красиво оформлены, дополнены иллюстрациями и легко читаются. На сайтеесть такие категории как «Путешествия», «Семья и отношения» и многие другие.", 
 			  keywords: "Буду Знать, Путешествия, Семья и отношения,  статьи разной тематики",
 			  robots: "index, follow",
-			  image: allBlogs[0].content[0].img	
+			  prevImg: "huJAK"	
 		}
 	}
 
@@ -184,7 +182,7 @@ module.exports.show = async(req, res, next) => {
 					  description: foundPage.seo.description, 
 					  keywords: foundPage.seo.keywords,
 					  robots: "index, follow",
-					  image: foundPage.content[0].img 
+					  image: foundPage.prevImg 
 		},
 			  title: foundPage.seo.title,
 			 

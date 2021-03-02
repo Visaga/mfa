@@ -27,7 +27,7 @@
 	</div>
 	
 	
-	
+	<%if (currentUrl != "/articles/unpublished" && seoTags != false) {%>
 	<section class=" row p-0 m-auto d-flex justify-content-between">
 		
 		<div class=" col-md-6 mt-3 ">
@@ -79,11 +79,8 @@
 		</div>
 			</a>
 		</div>
-		
-		
-		
 	</section>
-	
+
 	
 	
 	<!-- <section class="col-sm-12 jumbotron p-0 position-relative">
@@ -145,7 +142,7 @@
 			</a>
 		</div>
 	</section>
-	
+		<% } %>
 	
 	<!-- =============MAIN CONTENT SECTION============= -->
 	<div class="mainContent  col-xl-9">
