@@ -26,9 +26,9 @@
 		 <h1 id="title" class="text-start"> <%- foundPage.title %> </h1>
 		
 		<div  class="d-flex flex-wrap">
-			<time class="text-muted mr-3 d-block " datetime="<%= foundPage.createdDate %>"> Опубликовано: <%= foundPage.createdDate.toLocaleString() %></time>
+			<time class="text-muted mr-3 d-block " datetime="<%= foundPage.createdDate.toISOString() %>"> Опубликовано: <%= foundPage.createdDate.toLocaleString() %></time>
 		<% if (foundPage.modifiedDate){ %>
-		<time class="text-muted mr-3 d-block" datetime="<%= foundPage.modifiedDate %>"> Изменено: <%= foundPage.modifiedDate.toLocaleString() %></time>
+		<time class="text-muted mr-3 d-block" datetime="<%= foundPage.modifiedDate.toISOString() %>"> Изменено: <%= foundPage.modifiedDate.toLocaleString() %></time>
 	        <%}%>
 		</div>
 			
@@ -99,7 +99,7 @@
 
 	<div id="rightBar-stickyBlock" class="mt-5"></div>
 	</div>
-	<!-- ------------------------------------------------------------------------->
+	
 	
 	
 	
@@ -108,7 +108,7 @@
 	<div>
 		<div class="row row-cols-1 row-cols-md-2 g-4 mt-5" id="lazyLoadingBlock"></div>
 	</div>
-	<!-- ---------------------------------------------------------------------------- -->
+
 	
 	
 </div>

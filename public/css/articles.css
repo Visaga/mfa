@@ -35,7 +35,9 @@
 }
 
 
-
+.h3small{
+	font-size: 1.1rem;
+}
 
 
 .section-title-box{
@@ -148,4 +150,5 @@
 .overlayTitle{
 	font-size: 1.4rem;
 }
+
 

@@ -31,52 +31,54 @@
 	<section class=" row p-0 m-auto d-flex justify-content-between">
 		
 		<div class=" col-md-6 mt-3 ">
+			
 			<a rel="internal" href="/articles/<%= allBlogs[0].urlExtention.replace(/ /g, "-")%>/<%= allBlogs[0]._id%>" class="text-decoration-none text-dark">
-			<div class=" card border-0 ">
-			<div class="img-wrapper d-block p-0 ">
-					<img src="<%= allBlogs[0].prevImg %>" alt="<%= allBlogs[0].title %>" class="img-fluid">
-			</div>
-			
-			
-			<div class="card-body cardOverlay text-light bottom-0 position-absolute">
-				<h5 class="card-title pt-3 overlayTitle text-center">
-					<%=allBlogs[0].title%>
-				</h5>
-				<div class="d-none d-lg-block">
-					<% if (allBlogs[0].content[0].text.length > 1) {%>
-					<p class="card-text text-center"><%- allBlogs[0].content[0].text.slice(0,100) + "..." %></p>
-					  <% } else { %>
-						  <p class="card-text text-center"><%- allBlogs[0].content[1].text.slice(0,100) + "..." %></p>
-					 <% } %>
+				
+				
+				 <div class=" card border-0 ">
+						<div class="img-wrapper d-block p-0 ">
+								<img src="<%= allBlogs[0].prevImg %>" alt="<%= allBlogs[0].title %>" class="img-fluid">
+						</div>
+						<div class="card-body cardOverlay text-light bottom-0 position-absolute">
+							<h5 class="card-title pt-3 overlayTitle text-center">
+								<%=allBlogs[0].title%>
+							</h5>
+							<div class="d-none d-lg-block">
+								<% if (allBlogs[0].content[0].text.length > 1) {%>
+								<p class="card-text text-center"><%- allBlogs[0].content[0].text.slice(0,100) + "..." %></p>
+								  <% } else { %>
+									  <p class="card-text text-center"><%- allBlogs[0].content[1].text.slice(0,100) + "..." %></p>
+								 <% } %>
+							</div>
+						</div>
 				</div>
-			    </div>
-		</div>
+				
 			</a>
 		</div>
 		
 		
 		
 		<div class=" col-md-6 mt-3">
-			<a rel="internal" href="/articles/<%= allBlogs[0].urlExtention.replace(/ /g, "-")%>/<%= allBlogs[0]._id%>" class="text-decoration-none text-dark">
-			<div class="card border-0 ">
-			<div class="img-wrapper d-block p-0 ">
-					<img src="<%= allBlogs[1].prevImg %>" alt="<%= allBlogs[1].title %>" class="img-fluid">
-			</div>
-			
-			
-			<div class="card-body cardOverlay text-light bottom-0 position-absolute">
-				<h5 class="card-title overlayTitle pt-3 text-center">
-					<%=allBlogs[1].title%>
-				</h5>
-				<div class="d-none d-lg-block">
-					<% if (allBlogs[1].content[0].text.length > 1) {%>
-					<p class="card-text text-center"><%- allBlogs[1].content[0].text.slice(0,100) + "..." %></p>
-					  <% } else { %>
-						  <p class="card-text text-center"><%- allBlogs[1].content[1].text.slice(0,200) + "..." %></p>
-					 <% } %>
+			<a rel="internal" href="/articles/<%= allBlogs[1].urlExtention.replace(/ /g, "-")%>/<%= allBlogs[1]._id%>" class="text-decoration-none text-dark">
+				
+				<div class="card border-0 ">
+					<div class="img-wrapper d-block p-0 ">
+							<img src="<%= allBlogs[1].prevImg %>" alt="<%= allBlogs[1].title %>" class="img-fluid">
+					</div>
+					<div class="card-body cardOverlay text-light bottom-0 position-absolute">
+						<h5 class="card-title overlayTitle pt-3 text-center">
+							<%=allBlogs[1].title%>
+						</h5>
+						<div class="d-none d-lg-block">
+							<% if (allBlogs[1].content[0].text.length > 1) {%>
+							<p class="card-text text-center"><%- allBlogs[1].content[0].text.slice(0,100) + "..." %></p>
+							  <% } else { %>
+								  <p class="card-text text-center"><%- allBlogs[1].content[1].text.slice(0,200) + "..." %></p>
+							 <% } %>
+						</div>
+					</div>
 				</div>
-			    </div>
-		</div>
+				
 			</a>
 		</div>
 	</section>
@@ -91,7 +93,7 @@
 					  <input id="searchInput" class="form-control me-2" type="text" placeholder="Search" name="search" aria-label="Search">
 					  <button class="btn btn-success" type="submit">Search</button>
 					</form> -->
-	   <!-- ------------------------------------------------------------------------------ -->
+	   <!-- -->
 		<!-- </div>
 		
 		
@@ -104,42 +106,41 @@
 			<span class="popular">Недавно опубликованные</span>
 		</div>
 		<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-		<%if (currentUrl != "/articles/unpublished") {%>	
-			<% for(let i = 2; i < 5; i++){ %>	
-			
-			<a href="/articles/<%= allBlogs[i].urlExtention.replace(/ /g, "-")%>/<%= allBlogs[i]._id%>" class="text-decoration-none text-dark">
-			 <div class="col">
-				<div class="card mt-3 border-0 h-100 futured-card">
-					<img src="<%= allBlogs[i].prevImg.replace("/upload", "/upload/w_600") %>" class="img-fluid " alt="<%=allBlogs[i].title %>">
-                      <div class="card-body card-body-up">
-					  <div class="card-title-wrapper text-center">
-						  <h5 class="card-title fixed-title"><%=allBlogs[i].title%></h5>
-					  </div>
-					  
-					  <% if (allBlogs[i].content[0].text.length > 1) {%>
-					<p class="card-text text-center"><%- allBlogs[i].content[0].text.slice(0,90) + "..." %></p>
-					  <% } else { %>
-						  <p class="card-text text-center"><%- allBlogs[i].content[1].text.slice(0,90) + "..." %></p>
-					 <% } %>
-					  
-					  
-				  </div>
-					
-					<div class="card-footer mt-2">
-						<span class="post-category text-light">
-							<%= allBlogs[i].category%>
-						</span>
-						<div class="float-right">
-							<small class="text-muted "><%=allBlogs[i].createdDate.toDateString()%></small>
-						    <small class="text-muted "> &#128065;<%=allBlogs[i].views.all%></small>
-						</div>
-   					 </div>
-					
-				</div>
-			  </div>	
-	 		<% } %>	
-		<% } %>	
-			</a>
+				<%if (currentUrl != "/articles/unpublished") {%>	
+					<% for(let i = 2; i < 5; i++){ %>	
+
+					<a href="/articles/<%= allBlogs[i].urlExtention.replace(/ /g, "-")%>/<%= allBlogs[i]._id%>" class="text-decoration-none text-dark">
+							 <div class="col">
+								<div class="card mt-3 border-0 h-100 futured-card">
+										<img src="<%= allBlogs[i].prevImg.replace("/upload", "/upload/w_600") %>" class="img-fluid " alt="<%=allBlogs[i].title %>">
+										  <div class="card-body card-body-up">
+												  <div class="card-title-wrapper text-center">
+													  <h5 class="card-title fixed-title"><%=allBlogs[i].title%></h5>
+												  </div>
+
+												  <% if (allBlogs[i].content[0].text.length > 1) {%>
+												        <p class="card-text text-center"><%- allBlogs[i].content[0].text.slice(0,90) + "..." %></p>
+												  <% } else { %>
+													    <p class="card-text text-center"><%- allBlogs[i].content[1].text.slice(0,90) + "..." %></p>
+												  <% } %>
+									     </div>
+
+										<div class="card-footer mt-2">
+											<span class="post-category text-light">
+												<%= allBlogs[i].category%>
+											</span>
+											<div class="float-right">
+												<small class="text-muted "><%=allBlogs[i].createdDate.toDateString()%></small>
+												<small class="text-muted "> &#128065;<%=allBlogs[i].views.all%></small>
+											</div>
+										</div>
+
+								</div>
+						    </div>	
+						</a>
+							<% } %>	
+						<% } %>	
+				    
 		</div>
 	</section>
 		<% } %>
@@ -238,66 +239,6 @@
 		<hr class="mb-3 shadow-lg">
 		
 		
-		
-		
-		<!-- <div class="section">
-
-<div class="container">
-
-<div class="row">
-<div class="col-md-8">
-<div class="row">
-<div class="col-md-12">
-<div class="section-title">
-<h2>Most Read</h2>
-</div>
-</div>
-
-<div class="col-md-12">
-<div class="post post-row">
-<a class="post-img" href="blog-post.html"><img src="https://res.cloudinary.com/dnl9unhgy/image/upload/w_600/v1612666184/BuduZnat/jsveunxve3cbloqcdrfy.webp" alt=""></a>
-<div class="post-body">
-<div class="post-meta">
-<a class="post-category cat-2" href="category.html">JavaScript</a>
-<span class="post-date">March 27, 2018</span>
-</div>
-<h3 class="post-title"><a href="blog-post.html">Chrome Extension Protects Against JavaScript-Based CPU Side-Channel Attacks</a></h3>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
-</div>
-</div>
-</div>
-		 -->
-		
-		<!-- ==============Bottom tizers======== -->
-<!-- 		
-		<div class="bottomLazyLoad row d-flex justify-content-between mt-5 flex-wrap">
-			
-	<% allBlogs.forEach(blog =>{ %>
-	
-			<div class="col-md-6 col-lg-4 ">
-				
-			
-  <div class="card mb-3"  >
-  <img src="<%= blog.content[0].img %>" class="card-img-top" alt="<%= blog.content[0].alt %>">
-  <div class="card-body">
-    <h5 class="card-title"><%- blog.title %></h5>
-	  
-    
-	  <div class="d-flex justify-content-between">
-		   <a href="/articles/<%= blog.urlExtention.replace(/ /g, "-")%>/<%= blog._id%>" class="btn btn-primary btn-sm float-right">Продолжение..</a>
-		  <span class="text-muted">&#128065; <%=blog.views.all%></span>
-		  
-		  <% if (currentUser){ %>
-	  <form action="/articles/<%= blog._id %>/?_method=DELETE" method="POST">
-		  <input type="submit" class="btn btn-danger btn-sm" value="DELETE">
-	  </form>
-		  <% } %>
-	  </div>
-  </div>
-</div>
-</div>
-<% }) %>
-</div> -->
 		
 		
 		</div>	
