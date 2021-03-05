@@ -22,8 +22,22 @@ module.exports.index = async(req, res, next) => {
 	}
 	
 	
-
 	res.render("home", data );
+		
+	}else if(req.query.category){
+		req.query.category = sanitizeHtml(req.query.category).toLowerCase();
+		req.query.category = req.query.category[0].toUpperCase() + req.query.category.substring(1)
+		const allBlogs = await Blog.find( {category: req.query.category, published: true});
+		const data = {
+	  allBlogs, 
+		title: "Буду Знать - Интересные и познавательные публикации.",
+		seoTags: false,
+		query: req.query.category
+	}
+	
+	
+	res.render("home", data );
+		
 		
 	}else {
 

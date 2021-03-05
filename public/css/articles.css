@@ -51,9 +51,11 @@
 .popular{
 	background: #fb4834;
 	color: #fff;
-	padding: 5px;
 	min-width: 300px;
 	width: 33%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .card-body-up{

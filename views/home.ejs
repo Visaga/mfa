@@ -4,7 +4,7 @@
 <div class="row position-relative">
 	<div class="catigories d-flex justify-content-center bg-light p-1">
 		
-		<div class="catigories-wrapper d-flex">
+		<div class="catigories-wrapper d-none d-md-flex">
 			<div>
 			<span class="">НОВОЕ</span>
 		</div>
@@ -12,15 +12,16 @@
 		<div>
 			<span class=" ">ПОПУЛЯРНОЕ</span>
 		</div>
-		</div>
-		<div class="catigories-wrapper d-none d-md-flex">
 			<span class="pl-3 pr-3">|</span>
+		</div>
+		<div class="catigories-wrapper d-flex">
+			
 			<div>
-			<span class="">ПУТЕШЕСТВИЯ</span>
+				<span><a class="text-decoration-none text-dark" rel="category" href="/articles/?category=ПУТЕШЕСТВИЯ">ПУТЕШЕСТВИЯ</a></span>
 		</div>
 		<span class="pl-3 pr-3">|</span>
 		<div>
-			<span class="">СЕМЬЯ И ОТНОШЕНИЯ</span>
+			<span><a class="text-decoration-none text-dark" rel="category" href="/articles/?category=СЕМЬЯ И ОТНОШЕНИЯ">СЕМЬЯ/ОТНОШЕНИЯ</a></span>
 		</div>
 		</div>
 		
@@ -102,11 +103,11 @@
 	<!-- ==========RESENT POSTS SECTION ======================== -->
 	
 	<section class="container-fluid resent-posts-section mb-5">
-		<div class="section-title-box d-flex">
+		<div class="section-title-box d-flex ">
 			<span class="popular">Недавно опубликованные</span>
 		</div>
 		<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-				<%if (currentUrl != "/articles/unpublished") {%>	
+				<%if (currentUrl != "/articles/unpublished" ) {%>	
 					<% for(let i = 2; i < 5; i++){ %>	
 
 					<a href="/articles/<%= allBlogs[i].urlExtention.replace(/ /g, "-")%>/<%= allBlogs[i]._id%>" class="text-decoration-none text-dark">
@@ -174,9 +175,8 @@
 		<%}%>
 		
 		
-		
-		
-			<% for (let i = 5; i < allBlogs.length; i++){ %>
+		<% const start  = seoTags? 5: 0; %>
+			<% for (let i = start; i < allBlogs.length; i++){ %>
 		
 		<!-- ======card/////////////////// -->
 <a href="/articles/<%= allBlogs[i].urlExtention.replace(/ /g, "-")%>/<%= allBlogs[i]._id%>" class="text-decoration-none text-dark">
