@@ -26,7 +26,7 @@ module.exports.index = async(req, res, next) => {
 		
 	}else if(req.query.category){
 		req.query.category = sanitizeHtml(req.query.category).toLowerCase();
-		req.query.category = req.query.category[0].toUpperCase() + req.query.category.substring(1)
+		req.query.category = req.query.category[0].toUpperCase() + req.query.category.substring(1).replace(/-/gi, " ");
 		const allBlogs = await Blog.find( {category: req.query.category, published: true});
 		const data = {
 	  allBlogs, 
