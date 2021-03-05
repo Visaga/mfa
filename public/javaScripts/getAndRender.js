@@ -145,7 +145,7 @@ const category = document.querySelector("#category").textContent;
 	    for(let i = 0; i < 5; i++){
 			
 			const link = document.createElement("li");
-			link.innerHTML = ` <a href="${sameCategoryBlogs[i].urlExtention}" >${ sameCategoryBlogs[i].title} </a>`
+			link.innerHTML = ` <a href='/articles/${sameCategoryBlogs[i].urlExtention.replace(/ /g, "-")}/${sameCategoryBlogs[i]._id }' >${ sameCategoryBlogs[i].title} </a>`
 			
 			linkList.append(link)
 		}
